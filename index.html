@@ -289,7 +289,7 @@
         .splash-btn:hover { background:var(--gold); color:#000; transform:translateY(-3px); }
         .splash-hint { font-size:.75rem; color:rgba(255,255,255,0.3); margin-top:1rem; }
 
-        /* Madrina card grid */
+        /* (madrina section removed) */
         .madrina-card {
             background:rgba(255,255,255,0.08);
             border-radius:12px; padding:16px 12px;
@@ -351,7 +351,7 @@
             <p class="splash-subtitle" id="splashSubtitle">Est&aacute;s invitado(a) a mis</p>
             <h1 class="splash-names">Angel Said</h1>
             <div class="splash-divider"></div>
-            <p class="splash-date" id="splashDate">11 de Septiembre, 2026</p>
+            <p class="splash-date" id="splashDate">12 de Septiembre, 2026</p>
             <p id="splashGuest" style="display:none;font-size:1.6rem;font-family:'Cormorant Garamond',serif;margin:.3rem 0;"></p>
             <p id="splashPases" style="display:none;opacity:.75;font-size:.9rem;margin:.2rem 0 1rem;"></p>
             <button class="splash-btn" id="openInvitation">Abrir Invitaci&oacute;n</button>
@@ -446,17 +446,6 @@
             </div>
         </section>
 
-        <!-- Madrinas y Padrinos -->
-        <section>
-            <h2 class="section-title"><i class="fas fa-ribbon"></i> Mis Madrinas</h2>
-            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:12px; margin-top:20px;">
-                <div class="madrina-card">
-                    <div class="icon">&#x1F9F8;</div>
-                    <div class="role">&Uacute;ltima Mu&ntilde;eca</div>
-                    <div class="name">Teresa Escudero Cervantes</div>
-                </div>
-            </div>
-        </section>
 
         <!-- Galeria Masonry -->
         <section class="galeria-sesion">
@@ -480,7 +469,7 @@
                     <h3 class="event-title">Ceremonia</h3>
                     <div class="event-info">
                         <strong><i class="fas fa-calendar-alt"></i> Fecha</strong>
-                        Viernes, 11 de Septiembre de 2026
+                        Sábado, 12 de Septiembre de 2026
                     </div>
                     <div class="event-info">
                         <strong><i class="fas fa-clock"></i> Hora</strong>
@@ -502,7 +491,7 @@
                     <h3 class="event-title">Recepci&oacute;n</h3>
                     <div class="event-info">
                         <strong><i class="fas fa-calendar-alt"></i> Fecha</strong>
-                        Viernes, 11 de Septiembre de 2026
+                        Sábado, 12 de Septiembre de 2026
                     </div>
                     <div class="event-info">
                         <strong><i class="fas fa-clock"></i> Hora</strong>
@@ -622,19 +611,19 @@
 
         <!-- Footer -->
         <footer>
-            <p style="font-size: 1.2rem; margin-bottom: 15px;">&iexcl;Nos vemos el 11 de septiembre!</p>
+            <p style="font-size: 1.2rem; margin-bottom: 15px;">&iexcl;Nos vemos el 12 de septiembre!</p>
             <div class="divider" style="margin: 20px auto;"></div>
             <p>Con cari&ntilde;o, Angel Said</p>
             <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
-                &#10022; 11 de Septiembre de 2026 &#10022;
+                &#10022; 12 de Septiembre de 2026 &#10022;
             </p>
         </footer>
     </div>
 
     <script>
-        // Countdown Timer - 11 de septiembre de 2026 a las 14:00 hrs
+        // Countdown Timer - 12 de septiembre de 2026 a las 14:00 hrs
         function updateCountdown() {
-            const eventDate = new Date(2026, 8, 11, 14, 0, 0).getTime(); // Mes 8 = Septiembre
+            const eventDate = new Date(2026, 8, 12, 14, 0, 0).getTime(); // Mes 8 = Septiembre
             const now = new Date().getTime();
             const distance = eventDate - now;
 

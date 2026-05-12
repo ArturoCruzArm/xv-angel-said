@@ -1,5 +1,5 @@
 # XV Anos - Angel Said Anzueto Arguello
-## 11 de Septiembre de 2026 - Leon, Guanajuato
+## 12 de Septiembre de 2026 - Leon, Guanajuato
 
 Invitacion web para los XV anos de Angel Said.
 
