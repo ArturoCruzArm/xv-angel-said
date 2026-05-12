@@ -68,15 +68,22 @@
         const group = document.getElementById('nombresGroup');
         if (!container || !group) return;
         container.innerHTML = '';
-        const numAcomp = Math.max(0, count - 1);
-        group.style.display = numAcomp > 0 ? 'block' : 'none';
-        for (let i = 0; i < numAcomp; i++) {
+        if (count < 1) count = 1;
+        group.style.display = 'block';
+        // El primer campo es el titular (pre-llenado, readonly)
+        for (let i = 0; i < count; i++) {
             const inp = document.createElement('input');
             inp.type = 'text';
             inp.className = 'nombre-asistente';
-            inp.value = existing[i] || '';
-            inp.placeholder = 'Acompanante ' + (i + 1);
-            inp.style.cssText = 'width:100%;padding:10px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:.95rem;';
+            if (i === 0) {
+                inp.value = guestData.nombre;
+                inp.readOnly = true;
+                inp.style.cssText = 'width:100%;padding:10px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.04);color:inherit;font-size:.95rem;opacity:.7;';
+            } else {
+                inp.value = existing[i - 1] || '';
+                inp.placeholder = `Acompanante ${i}`;
+                inp.style.cssText = 'width:100%;padding:10px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:.95rem;';
+            }
             container.appendChild(inp);
         }
     }
@@ -190,7 +197,8 @@
             const pases = parseInt(document.getElementById('guests')?.value || '1');
             const asisteSel = document.getElementById('attendance')?.value;
             const mensaje = document.getElementById('message')?.value || '';
-            const nombresAcomp = Array.from(document.querySelectorAll('.nombre-asistente')).map(inp => inp.value.trim());
+            const allNames = Array.from(document.querySelectorAll('.nombre-asistente')).map(inp => inp.value.trim());
+            const nombresAcomp = allNames.slice(1); // sin el titular
 
             if (!nombre || !asisteSel) return;
             const asiste = asisteSel === 'si';

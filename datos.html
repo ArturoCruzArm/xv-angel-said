@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datos del Evento — XV Años Ángel Said</title>
+  <title>Datos del Evento — Angel Said</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -56,12 +56,13 @@
 
   <div class="save-toast" id="saveToast">✅ Información guardada</div>
 
-  <script src="visitas.js"></script>
   <script src="js/datos-form.js"></script>
   <script>
-    const SLUG = 'xv-anos-angel-said';
+    const SLUG = 'xv-angel-said';
     DatosForm.init(SLUG, 'datos-form-container');
 
+    // Toast global al guardar
+    const origNotif = window.DatosForm;
     document.addEventListener('df:saved', () => {
       const t = document.getElementById('saveToast');
       t.classList.add('show');

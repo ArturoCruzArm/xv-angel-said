@@ -3,200 +3,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Años - Angel Said</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='80'>👑</text></svg>">
-
-    <!-- Fuentes -->
+    <meta name="description" content="Invitaci&oacute;n a los XV a&ntilde;os de Angel Said - Le&oacute;n, Guanajuato">
+    <meta name="theme-color" content="#111111">
+    <title>XV A&ntilde;os - Angel Said</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .splash-screen {
-            position: fixed; inset: 0; z-index: 10000;
-            background: linear-gradient(160deg, #05080f 0%, #0d1a2e 50%, #0a0a0f 100%);
-            display: flex; align-items: center; justify-content: center;
-            transition: opacity .9s ease, visibility .9s ease;
-            overflow: hidden;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #111111;
+            --primary-light: #222222;
+            --primary-dark: #000000;
+            --gold: #d4af37;
+            --gold-light: #e8c547;
+            --gold-dark: #b8960f;
+            --cream: #f0f0f0;
+            --white: #ffffff;
         }
-        .splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .splash-particles {
-            position: absolute; inset: 0; pointer-events: none;
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image:
-                radial-gradient(circle, rgba(246,173,85,.15) 1px, transparent 1px),
-                radial-gradient(circle, rgba(246,173,85,.08) 1px, transparent 1px);
-            background-size: 60px 60px, 30px 30px;
-            background-position: 0 0, 15px 15px;
-            animation: particleDrift 20s linear infinite;
+                radial-gradient(circle at 20% 20%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212,175,55,0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
-        @keyframes particleDrift { from { transform: translateY(0); } to { transform: translateY(-60px); } }
-        .splash-glow {
-            position: absolute; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(246,173,85,.08) 0%, transparent 70%);
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            animation: glowPulse 4s ease-in-out infinite;
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+        header { text-align: center; padding: 60px 20px 40px; position: relative; }
+
+        .crown {
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 20px var(--gold));
+            color: var(--gold);
         }
-        @keyframes glowPulse { 0%,100%{opacity:.6; transform:translate(-50%,-50%) scale(1);} 50%{opacity:1; transform:translate(-50%,-50%) scale(1.15);} }
-        .splash-content {
-            position: relative; text-align: center; padding: 2rem;
-            animation: splashReveal .8s ease both;
-        }
-        @keyframes splashReveal { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-        .splash-icon {
-            font-size: 3rem; display: block; margin-bottom: 1.2rem;
-            animation: splashFloat 3s ease-in-out infinite;
-        }
-        @keyframes splashFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
-        .splash-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .75rem; font-weight: 500; letter-spacing: .45em;
-            text-transform: uppercase; color: rgba(246,173,85,.55);
-            margin-bottom: .8rem;
-        }
-        .splash-names {
+
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+
+        .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.6rem, 8vw, 4.5rem); font-weight: 700;
-            color: #f6ad55; line-height: 1.1; margin-bottom: .8rem;
-            text-shadow: 0 0 40px rgba(246,173,85,.3);
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            margin: 20px 0;
+            letter-spacing: 8px;
         }
-        .splash-divider {
-            width: 100px; height: 1px; margin: 1rem auto;
-            background: linear-gradient(90deg, transparent, #f6ad55, transparent);
+
+        .quincea\F1era-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            color: var(--gold-light);
+            text-shadow: 0 4px 20px rgba(212,175,55,0.6);
+            margin: 30px 0;
+            line-height: 1.2;
+            animation: glow 2s ease-in-out infinite alternate;
         }
-        .splash-date {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .85rem; letter-spacing: .2em;
-            color: rgba(255,255,255,.45); margin-bottom: 2.2rem;
+
+        @keyframes glow {
+            from { text-shadow: 0 4px 20px rgba(212,175,55,0.6); }
+            to { text-shadow: 0 4px 40px rgba(212,175,55,0.9); }
         }
-        .splash-btn {
-            display: inline-block; padding: 1rem 3rem;
-            background: transparent; border: 1.5px solid #f6ad55;
-            border-radius: 50px; color: #f6ad55;
-            font-family: 'Montserrat', sans-serif;
-            font-size: .9rem; font-weight: 600; letter-spacing: .15em;
-            cursor: pointer; transition: all .3s;
-            text-transform: uppercase;
+
+        .divider {
+            width: 200px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px auto;
+            position: relative;
         }
-        .splash-btn:hover { background: #f6ad55; color: #05080f; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(246,173,85,.35); }
-        .splash-hint {
-            font-family: 'Montserrat', sans-serif;
-            font-size: .7rem; color: rgba(255,255,255,.2);
-            margin-top: 1rem; letter-spacing: .1em;
+
+        .divider::before {
+            content: '\2756';
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--primary);
+            color: var(--gold);
+            font-size: 1.5rem;
+            padding: 0 10px;
         }
+
+        section {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(212,175,55,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100px; height: 2px;
+            background: var(--gold);
+        }
+
+        .quote {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-style: italic;
+            color: var(--gold-light);
+            margin: 40px 0;
+            padding: 30px;
+            border-left: 3px solid var(--gold);
+            border-right: 3px solid var(--gold);
+        }
+
+        .family-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; margin: 30px 0;
+        }
+
+        .family-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px; padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(212,175,55,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .family-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(212,175,55,0.2);
+        }
+
+        .family-icon { font-size: 3rem; margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--gold)); }
+        .family-role { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 15px; }
+        .family-names { font-size: 1.1rem; color: var(--cream); line-height: 1.8; }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; margin: 30px 0;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0.05));
+            border-radius: 15px; padding: 30px;
+            border: 2px solid var(--gold);
+            text-align: center;
+        }
+
+        .event-icon { font-size: 3.5rem; margin-bottom: 20px; display: block; color: var(--gold); }
+        .event-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
+        .event-info { color: var(--cream); margin: 10px 0; font-size: 1.1rem; }
+        .event-info strong { color: var(--gold-light); display: block; margin-bottom: 5px; }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px; margin: 40px auto;
+            max-width: 800px;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px; padding: 25px 15px;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+
+        .countdown-value {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700; color: var(--gold-light);
+            display: block;
+        }
+
+        .countdown-label { font-size: 0.9rem; color: var(--cream); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+        .btn {
+            display: inline-block; padding: 15px 40px; margin: 10px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--primary-dark);
+            text-decoration: none; border-radius: 50px;
+            font-weight: 700; font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212,175,55,0.6);
+        }
+
+        .dress-code {
+            text-align: center; padding: 40px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.1));
+            border-radius: 15px; margin: 30px 0;
+        }
+
+        .dress-code-icons { font-size: 4rem; margin: 20px 0; }
+        .dress-code-text { font-size: 1.3rem; color: var(--gold-light); font-weight: 600; }
+
+        footer {
+            text-align: center; padding: 40px 20px; margin-top: 60px;
+            border-top: 2px solid rgba(212,175,55,0.3);
+        }
+
+        footer p { color: var(--gold); margin: 10px 0; }
+
+        .floating-flower {
+            position: fixed; font-size: 2rem; opacity: 0.2;
+            pointer-events: none;
+            animation: floatFlower 15s infinite ease-in-out;
+        }
+
+        @keyframes floatFlower {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .countdown { grid-template-columns: repeat(2, 1fr); }
+            .event-details { grid-template-columns: 1fr; }
+            .family-section { grid-template-columns: 1fr; }
+            section { padding: 30px 20px; }
+            .btn { padding: 12px 30px; font-size: 0.9rem; }
+        }
+
+        /* RSVP */
+        #rsvp { padding: 60px 20px; background: rgba(0,0,0,0.3); }
+        #rsvp .section-title { text-align:center; margin-bottom:10px; }
+        .rsvp-form { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.08); border-radius: 16px; padding: 32px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display:block; margin-bottom:6px; font-size:.9rem; opacity:.85; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea { width:100%; padding:12px 14px; border:1px solid rgba(255,255,255,0.25); border-radius:8px; background:rgba(255,255,255,0.1); color:inherit; font-size:1rem; font-family:inherit; }
+        .form-group textarea { min-height:80px; resize:vertical; }
+        #successMessage { display:none; text-align:center; padding:24px; background:rgba(16,185,129,.15); border:1px solid #10b981; border-radius:12px; color:#6ee7b7; font-size:1.05rem; margin-top:16px; }
+
+        /* Splash */
+        .splash-screen { position:fixed; inset:0; z-index:10000; background:linear-gradient(135deg,#000 0%,#111 100%); display:flex; align-items:center; justify-content:center; transition:opacity .8s ease, visibility .8s ease; }
+        .splash-screen.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+        .splash-content { text-align:center; padding:2rem; }
+        .splash-icon { font-size:3rem; animation:splashFloat 3s ease-in-out infinite; color:var(--gold); }
+        @keyframes splashFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .splash-subtitle { font-size:.85rem; letter-spacing:.35em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-top:1.5rem; }
+        .splash-names { font-size:clamp(2.2rem,7vw,4rem); color:var(--gold); margin:.5rem 0; font-family:'Cormorant Garamond',serif; }
+        .splash-divider { width:120px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:1rem auto; }
+        .splash-date { font-size:.95rem; letter-spacing:.15em; color:rgba(255,255,255,0.5); }
+        .splash-btn { display:inline-block; margin-top:2.5rem; padding:1rem 3rem; background:transparent; border:2px solid var(--gold); border-radius:50px; color:var(--gold); font-size:1rem; font-weight:600; letter-spacing:.1em; cursor:pointer; transition:all .3s; }
+        .splash-btn:hover { background:var(--gold); color:#000; transform:translateY(-3px); }
+        .splash-hint { font-size:.75rem; color:rgba(255,255,255,0.3); margin-top:1rem; }
+
+        /* Madrina card grid */
+        .madrina-card {
+            background:rgba(255,255,255,0.08);
+            border-radius:12px; padding:16px 12px;
+            text-align:center;
+            border:1px solid rgba(212,175,55,0.2);
+        }
+        .madrina-card .icon { font-size:1.5rem; margin-bottom:6px; }
+        .madrina-card .role { font-size:.75rem; color:var(--gold); text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px; }
+        .madrina-card .name { font-size:.95rem; }
+        /* Filmstrip gallery */
+        .galeria-drone { padding: 55px 0; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.25) 50%, transparent 100%); overflow: hidden; }
+        .gal-titulo {
+            text-align: center; font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--gold);
+            letter-spacing: 4px; text-transform: uppercase; margin-bottom: 28px; font-weight: 400;
+        }
+        .gal-titulo span { display: block; font-family: 'Lato', sans-serif; font-size: .72rem; letter-spacing: .35em; opacity: .55; margin-top: 6px; }
+        .filmstrip-wrapper {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        }
+        .filmstrip { display: flex; gap: 14px; width: max-content; animation: filmscroll 30s linear infinite; }
+        .filmstrip:hover { animation-play-state: paused; }
+        .filmstrip img {
+            height: 270px; width: auto; object-fit: contain;
+            background: rgba(212,175,55,.1); border-radius: 12px; flex-shrink: 0;
+            box-shadow: 0 6px 24px rgba(0,0,0,.45);
+            transition: transform .4s ease, box-shadow .4s ease;
+        }
+        .filmstrip img:hover { transform: scale(1.05) translateY(-4px); box-shadow: 0 12px 36px rgba(212,175,55,.35); }
+        @keyframes filmscroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Masonry gallery */
+        .galeria-sesion { padding: 55px 20px; }
+        .masonry-grid { columns: 2; column-gap: 10px; }
+        @media (min-width: 600px) { .masonry-grid { columns: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 10px; opacity: 0; transform: translateY(45px) scale(.97); transition: opacity .65s ease, transform .65s ease; }
+        .masonry-item.vis { opacity: 1; transform: translateY(0) scale(1); }
+        .masonry-item img { width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,.4); transition: transform .4s ease; }
+        .masonry-item img:hover { transform: scale(1.03); }
+
+        /* Card carousel */
+        .galeria-recuerdos { padding: 55px 0 40px; }
+        .card-scroll { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 12px 28px 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .card-scroll::-webkit-scrollbar { display: none; }
+        .photo-card { flex-shrink: 0; scroll-snap-align: center; width: 76vw; max-width: 360px; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.45); border: 1px solid rgba(212,175,55,.18); background: rgba(255,255,255,.04); transition: transform .35s ease; }
+        .photo-card:hover { transform: translateY(-7px); }
+        .photo-card img { width: 100%; height: auto; display: block; }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; padding: 0 20px; }
+        .carousel-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(212,175,55,.3); cursor: pointer; padding: 0; transition: background .25s, transform .25s; }
+        .carousel-dots button.active { background: var(--gold); transform: scale(1.4); }
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
     <div class="splash-screen" id="splashScreen">
-        <div class="splash-particles"></div>
-        <div class="splash-glow"></div>
         <div class="splash-content">
-            <span class="splash-icon">👑</span>
-            <p class="splash-subtitle" id="splashSubtitle">Estás invitado(a) a mis</p>
-            <h1 class="splash-names">Ángel Said</h1>
+            <div class="splash-icon"><i class="fas fa-crown"></i></div>
+            <p class="splash-subtitle" id="splashSubtitle">Est&aacute;s invitado(a) a mis</p>
+            <h1 class="splash-names">Angel Said</h1>
             <div class="splash-divider"></div>
-            <p class="splash-date" id="splashDate">12 de Septiembre, 2026</p>
-            <p id="splashGuest" style="display:none;font-family:'Playfair Display',serif;font-size:clamp(1.4rem,5vw,2.2rem);color:#fff;margin-bottom:.4rem;"></p>
-            <p id="splashPases" style="display:none;font-family:'Montserrat',sans-serif;font-size:.85rem;letter-spacing:.15em;color:rgba(246,173,85,.7);margin-bottom:1.2rem;"></p>
-            <button class="splash-btn" id="openInvitation">Abrir Invitación</button>
+            <p class="splash-date" id="splashDate">11 de Septiembre, 2026</p>
+            <p id="splashGuest" style="display:none;font-size:1.6rem;font-family:'Cormorant Garamond',serif;margin:.3rem 0;"></p>
+            <p id="splashPases" style="display:none;opacity:.75;font-size:.9rem;margin:.2rem 0 1rem;"></p>
+            <button class="splash-btn" id="openInvitation">Abrir Invitaci&oacute;n</button>
             <p class="splash-hint">Toca para abrir</p>
         </div>
     </div>
-    <script>
-    (function(){
-        const SB_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
-        const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
-        const token = new URLSearchParams(window.location.search).get('inv');
 
-        if (token) {
-            fetch(`${SB_URL}/rest/v1/invitados?token=eq.${token}&select=nombre,pases_asignados`,
-                { headers: { apikey: SB_ANON, Authorization: 'Bearer ' + SB_ANON } })
-            .then(r => r.json()).then(rows => {
-                if (!rows.length) return;
-                const g = rows[0];
-                document.querySelector('.splash-names').style.display = 'none';
-                document.getElementById('splashSubtitle').textContent = 'Hola,';
-                document.getElementById('splashDate').style.display = 'none';
-                const gEl = document.getElementById('splashGuest');
-                gEl.textContent = g.nombre;
-                gEl.style.display = 'block';
-                const pEl = document.getElementById('splashPases');
-                pEl.textContent = `🎟 ${g.pases_asignados} ${g.pases_asignados === 1 ? 'pase asignado' : 'pases asignados'}`;
-                pEl.style.display = 'block';
-                document.getElementById('openInvitation').textContent = 'Ver mi Invitación';
-            }).catch(()=>{});
-        }
+    <!-- Floating elements -->
+    <div class="floating-flower" style="left: 10%; animation-delay: 0s;">&#10022;</div>
+    <div class="floating-flower" style="left: 30%; animation-delay: 3s;">&#10023;</div>
+    <div class="floating-flower" style="left: 50%; animation-delay: 6s;">&#10022;</div>
+    <div class="floating-flower" style="left: 70%; animation-delay: 9s;">&#10023;</div>
+    <div class="floating-flower" style="left: 90%; animation-delay: 12s;">&#10022;</div>
 
-        document.getElementById('openInvitation').addEventListener('click', function() {
-            document.getElementById('splashScreen').classList.add('hidden');
-            const music = document.getElementById('background-music');
-            if (music) { music.volume = 0.4; music.play().catch(()=>{}); document.getElementById('music-icon').className = 'fas fa-volume-up'; }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    })();
-    </script>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="crown"><i class="fas fa-crown"></i></div>
+            <h1 class="main-title">MIS XV A&Ntilde;OS</h1>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,10vw,6rem);font-weight:700;color:var(--gold-light);text-shadow:0 4px 20px rgba(212,175,55,0.6);margin:30px 0;line-height:1.2;animation:glow 2s ease-in-out infinite alternate;">Angel Said<br>Anzueto Arguello</h2>
+            <div class="divider"></div>
+        </header>
 
-    <!-- Música de fondo -->
-    <audio id="background-music" loop>
-        <source src="musica-fondo.mp3" type="audio/mpeg">
-    </audio>
+        <!-- Quote -->
+        <div class="quote">
+            &ldquo;Hoy comienza un nuevo cap&iacute;tulo lleno de sue&ntilde;os, ilusiones y magia.<br>
+            Gracias por acompa&ntilde;arme en este d&iacute;a tan especial.&rdquo;
+        </div>
 
-    <!-- Botón de música -->
-    <button id="music-toggle" class="music-btn" aria-label="Controlar música">
-        <i id="music-icon" class="fas fa-volume-mute"></i>
-    </button>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <p class="hero-subtitle">CELEBRA CONMIGO MIS</p>
-            <h1 class="hero-title">XV AÑOS</h1>
-            <div class="name-container">
-                <h2 class="quinceañero-name">Angel Said<br>Anzueto Argüello</h2>
-            </div>
-            <div class="date-container">
-                <p class="date-month">SEPTIEMBRE</p>
-                <div class="date-row">
-                    <span class="date-day">SÁBADO</span>
-                    <span class="date-number">12</span>
-                    <span class="date-year">2026</span>
+        <!-- Galeria Filmstrip -->
+        <section class="galeria-drone">
+            <h2 class="gal-titulo">Mis Fotos<span>&#10022; Angel Said &#10022;</span></h2>
+            <div class="filmstrip-wrapper">
+                <div class="filmstrip">
+                    <img src="img/foto-1.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-2.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-3.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-4.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-5.webp" alt="Angel Said" loading="lazy">
+                    <!-- Duplicadas para loop infinito -->
+                    <img src="img/foto-1.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-2.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-3.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-4.webp" alt="Angel Said" loading="lazy">
+                    <img src="img/foto-5.webp" alt="Angel Said" loading="lazy">
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <img src="img/1.png" alt="Angel Said" style="display:block; width:100%; height:auto;">
-
-    <!-- Parents Section -->
-    <section class="section" id="parents">
-        <div class="container">
-            <h2 class="section-title">CON LA BENDICIÓN DE</h2>
-            <div class="parents-container">
-                <div class="parent-item">
-                    <i class="fas fa-heart parent-icon"></i>
-                    <h3>Mamá</h3>
-                    <p><span data-campo="madre-nombre">Celia Guadalupe Anzueto Argüello</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Countdown Section -->
-    <section class="section countdown-section" id="countdown-section">
-        <div class="container">
-            <h2 class="section-title">CUENTA REGRESIVA</h2>
+        <!-- Countdown -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-clock"></i> Cuenta Regresiva</h2>
             <div class="countdown" id="countdown">
                 <div class="countdown-item">
                     <span class="countdown-value" id="days">00</span>
-                    <span class="countdown-label">Días</span>
+                    <span class="countdown-label">D&iacute;as</span>
                 </div>
                 <div class="countdown-item">
                     <span class="countdown-value" id="hours">00</span>
@@ -211,210 +422,439 @@
                     <span class="countdown-label">Segundos</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Events Section -->
-    <section class="section" id="events">
-        <div class="container">
-            <h2 class="section-title">CELEBRACIÓN</h2>
-
-            <!-- Misa -->
-            <div class="event-card">
-                <div class="event-icon">
-                    <i class="fas fa-church"></i>
+        <!-- Family -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-users"></i> Mi Familia</h2>
+            <div class="family-section">
+                <div class="family-card">
+                    <div class="family-icon"><i class="fas fa-home"></i></div>
+                    <div class="family-role">Mi Mam&aacute;</div>
+                    <div class="family-names">
+                        Celia Guadalupe Anzueto Arguello
+                    </div>
                 </div>
-                <h3 class="event-title">Misa de Acción de Gracias</h3>
-                <div class="event-details">
-                    <p class="event-time"><i class="fas fa-clock"></i> <span data-campo="ceremonia-hora">2:00 PM</span></p>
-                    <p class="event-location"><i class="fas fa-map-marker-alt"></i> <span data-campo="ceremonia-lugar">Templo Expiatorio</span></p>
-                    <p class="event-address" data-campo="ceremonia-direccion">León, Guanajuato</p>
-                    <div class="event-buttons">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Templo+Expiatorio+Leon+Guanajuato" target="_blank" class="btn btn-primary" data-campo="ceremonia-maps">
-                            <i class="fas fa-map-marked-alt"></i> Ver Mapa
-                        </a>
+                <div class="family-card">
+                    <div class="family-icon"><i class="fas fa-heart"></i></div>
+                    <div class="family-role">Mis Padrinos de Honor</div>
+                    <div class="family-names">
+                        Blanca Erika Urbina Rodr&iacute;guez<br>
+                        Jorge Alberto Rodr&iacute;guez Barroso
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Recepción -->
-            <div class="event-card">
-                <div class="event-icon">
-                    <i class="fas fa-glass-cheers"></i>
+        <!-- Madrinas y Padrinos -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-ribbon"></i> Mis Madrinas</h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:12px; margin-top:20px;">
+                <div class="madrina-card">
+                    <div class="icon">&#x1F9F8;</div>
+                    <div class="role">&Uacute;ltima Mu&ntilde;eca</div>
+                    <div class="name">Teresa Escudero Cervantes</div>
                 </div>
-                <h3 class="event-title">Recepción</h3>
-                <div class="event-details">
-                    <p class="event-time"><i class="fas fa-clock"></i> <span data-campo="recepcion-hora">6:00 PM</span></p>
-                    <p class="event-location"><i class="fas fa-map-marker-alt"></i> <span data-campo="recepcion-lugar">Salones Santa Clara</span></p>
-                    <p class="event-address" data-campo="recepcion-direccion">León, Guanajuato</p>
-                    <div class="event-buttons">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Salones+Santa+Clara+Leon+Guanajuato" target="_blank" class="btn btn-primary" data-campo="recepcion-maps">
-                            <i class="fas fa-map-marked-alt"></i> Ver Mapa
-                        </a>
+            </div>
+        </section>
+
+        <!-- Galeria Masonry -->
+        <section class="galeria-sesion">
+            <h2 class="gal-titulo"><i class="fas fa-camera-retro" style="font-size:.75em;opacity:.7;margin-right:8px;"></i>Galer&iacute;a<span>&#10022; Momentos &uacute;nicos &#10022;</span></h2>
+            <div class="masonry-grid">
+                <div class="masonry-item"><img src="img/foto-1.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="masonry-item"><img src="img/foto-2.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="masonry-item"><img src="img/foto-3.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="masonry-item"><img src="img/foto-4.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="masonry-item"><img src="img/foto-5.webp" alt="Angel Said" loading="lazy"></div>
+            </div>
+        </section>
+
+        <!-- Event Details -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Detalles del Evento</h2>
+            <div class="event-details">
+                <!-- Ceremony -->
+                <div class="event-card">
+                    <span class="event-icon"><i class="fas fa-church"></i></span>
+                    <h3 class="event-title">Ceremonia</h3>
+                    <div class="event-info">
+                        <strong><i class="fas fa-calendar-alt"></i> Fecha</strong>
+                        Viernes, 11 de Septiembre de 2026
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-clock"></i> Hora</strong>
+                        14:00 hrs (2:00 PM)
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-map-marker-alt"></i> Lugar</strong>
+                        Templo Expiatorio<br>
+                        Centro, Le&oacute;n, Gto.
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="https://www.google.com/maps/search/Templo+Expiatorio+Leon+Guanajuato" target="_blank" class="btn"><i class="fas fa-map-marked-alt"></i> Ver Mapa</a>
+                    </div>
+                </div>
+
+                <!-- Reception -->
+                <div class="event-card">
+                    <span class="event-icon"><i class="fas fa-glass-cheers"></i></span>
+                    <h3 class="event-title">Recepci&oacute;n</h3>
+                    <div class="event-info">
+                        <strong><i class="fas fa-calendar-alt"></i> Fecha</strong>
+                        Viernes, 11 de Septiembre de 2026
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-clock"></i> Hora</strong>
+                        18:30 hrs (6:30 PM)
+                    </div>
+                    <div class="event-info">
+                        <strong><i class="fas fa-map-marker-alt"></i> Lugar</strong>
+                        Salones Santa Clara<br>
+                        Blvd Torres Landa 1702, Le&oacute;n, Gto. 37470
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="https://www.google.com/maps/search/Salones+Santa+Clara+Blvd+Torres+Landa+1702+Leon+Guanajuato" target="_blank" class="btn"><i class="fas fa-map-marked-alt"></i> Ver Mapa</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <img src="img/2.png" alt="Angel Said" style="display:block; width:100%; height:auto;">
-
-    <!-- Dress Code Section -->
-    <section class="section dress-code-section">
-        <div class="container">
-            <h2 class="section-title">CÓDIGO DE VESTIMENTA</h2>
-            <div class="dress-code-content">
-                <i class="fas fa-user-tie dress-code-icon"></i>
-                <p class="dress-code-text" data-campo="vestimenta-tipo">Formal</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gifts Section -->
-    <section class="section" id="gifts">
-        <div class="container">
-            <h2 class="section-title">MESA DE REGALOS</h2>
-            <div class="gifts-content">
-                <i class="fas fa-gift gifts-icon"></i>
-                <p>Tu presencia es mi mejor regalo</p>
-                <p class="gifts-subtitle">Pero si deseas obsequiarme algo:</p>
-                <h3>Lluvia de Sobres</h3>
-            </div>
-        </div>
-    </section>
-
-    <img src="img/3.png" alt="Angel Said" style="display:block; width:100%; height:auto;">
-
-    <!-- RSVP Section -->
-    <section class="section rsvp-section" id="rsvp">
-        <div class="container">
-            <h2 class="section-title">CONFIRMA TU ASISTENCIA</h2>
-            <p class="rsvp-subtitle">Por favor confirma antes del 5 de septiembre de 2026</p>
-
-            <div id="personalizedWelcome" style="display:none;text-align:center;margin-bottom:20px;padding:16px;background:rgba(246,173,85,.08);border:1px solid rgba(246,173,85,.3);border-radius:12px;">
-                <p id="guestWelcomeText" style="font-size:1.1rem;margin-bottom:6px;color:#f6ad55;"></p>
-                <p id="guestPassesText" style="opacity:.75;font-size:.9rem;"></p>
-            </div>
-
-            <form id="rsvpForm" style="max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:14px;">
-                <div class="form-group">
-                    <label for="name" style="display:block;margin-bottom:6px;font-size:.9rem;opacity:.8;">Nombre completo</label>
-                    <input type="text" id="name" name="name" required placeholder="Tu nombre completo"
-                        style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:1rem;">
+        <!-- Itinerario -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-list-ol"></i> Itinerario</h2>
+            <div style="max-width:500px;margin:0 auto;">
+                <div style="display:flex;align-items:center;gap:15px;margin:15px 0;padding:15px;background:rgba(255,255,255,0.05);border-radius:10px;border-left:3px solid var(--gold);">
+                    <span style="font-size:1.5rem;">&#x26EA;</span>
+                    <div><strong style="color:var(--gold);">2:00 PM</strong><br>Misa de Acci&oacute;n de Gracias &mdash; Templo Expiatorio</div>
                 </div>
-                <div class="form-group">
-                    <label for="guests" style="display:block;margin-bottom:6px;font-size:.9rem;opacity:.8;">Número de personas</label>
-                    <input type="number" id="guests" name="guests" min="1" max="20" value="1" required>
+                <div style="display:flex;align-items:center;gap:15px;margin:15px 0;padding:15px;background:rgba(255,255,255,0.05);border-radius:10px;border-left:3px solid var(--gold);">
+                    <span style="font-size:1.5rem;">&#x1F37E;</span>
+                    <div><strong style="color:var(--gold);">6:30 PM</strong><br>Recepci&oacute;n &mdash; Salones Santa Clara</div>
                 </div>
-                
+                <div style="display:flex;align-items:center;gap:15px;margin:15px 0;padding:15px;background:rgba(255,255,255,0.05);border-radius:10px;border-left:3px solid var(--gold);">
+                    <span style="font-size:1.5rem;">&#x1F35D;</span>
+                    <div><strong style="color:var(--gold);">8:00 PM</strong><br>Cena</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:15px;margin:15px 0;padding:15px;background:rgba(255,255,255,0.05);border-radius:10px;border-left:3px solid var(--gold);">
+                    <span style="font-size:1.5rem;">&#x1F3B6;</span>
+                    <div><strong style="color:var(--gold);">Mariachi</strong><br>1 hora y media de mariachi en vivo</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:15px;margin:15px 0;padding:15px;background:rgba(255,255,255,0.05);border-radius:10px;border-left:3px solid var(--gold);">
+                    <span style="font-size:1.5rem;">&#x1F319;</span>
+                    <div><strong style="color:var(--gold);">1:00 AM</strong><br>Fin de la celebraci&oacute;n</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dress Code -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-tshirt"></i> C&oacute;digo de Vestimenta</h2>
+            <div class="dress-code">
+                <div class="dress-code-icons"><i class="fas fa-user-tie"></i> <i class="fas fa-female"></i></div>
+                <p class="dress-code-text">FORMAL / ELEGANTE</p>
+                <p style="margin-top: 15px; font-size: 1rem; color: var(--cream);">
+                    Te pedimos asistir con vestimenta formal para hacer de esta noche una ocasi&oacute;n a&uacute;n m&aacute;s especial
+                </p>
+            </div>
+        </section>
+
+        <!-- Galeria Carousel -->
+        <section class="galeria-recuerdos">
+            <h2 class="gal-titulo" style="padding:0 20px;"><i class="fas fa-images" style="font-size:.75em;opacity:.7;margin-right:8px;"></i>Recuerdos<span>&#10022; Desliza para ver m&aacute;s &#10022;</span></h2>
+            <div class="card-scroll" id="cardScroll">
+                <div class="photo-card"><img src="img/foto-1.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="photo-card"><img src="img/foto-2.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="photo-card"><img src="img/foto-3.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="photo-card"><img src="img/foto-4.webp" alt="Angel Said" loading="lazy"></div>
+                <div class="photo-card"><img src="img/foto-5.webp" alt="Angel Said" loading="lazy"></div>
+            </div>
+            <div class="carousel-dots" id="carouselDots"></div>
+        </section>
+
+        <!-- RSVP -->
+        <section id="rsvp">
+            <h2 class="section-title">Confirma tu Asistencia</h2>
+            <p style="text-align:center;margin-bottom:28px;opacity:.8;">
+                Por favor confirma antes del <span id="confirmacionLimite">15 de agosto de 2026</span>
+            </p>
+            <div id="personalizedWelcome" style="display:none;text-align:center;margin-bottom:24px;padding:20px;background:rgba(255,255,255,0.07);border-radius:12px;">
+                <p id="guestWelcomeText" style="font-size:1.1rem;margin-bottom:8px;"></p>
+                <p id="guestPassesText" style="opacity:.75;font-size:.95rem;"></p>
+            </div>
+            <div class="rsvp-form">
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo *</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Numero de personas *</label>
+                        <input type="number" id="guests" name="guests" min="1" max="20" value="1" required>
+                        <small style="opacity:.6;display:block;margin-top:4px;">Incluye a todos los que asistiran contigo</small>
+                    </div>
                     <div class="form-group" id="nombresGroup" style="display:none;">
-                        <label>Nombres de tus acompanantes</label>
+                        <label>Nombres de los asistentes</label>
                         <div id="nombresContainer"></div>
+                        <small style="opacity:.6;display:block;margin-top:4px;">Escribe el nombre de cada persona</small>
                     </div>
-<div class="form-group">
-                    <label for="attendance" style="display:block;margin-bottom:6px;font-size:.9rem;opacity:.8;">¿Asistirás?</label>
-                    <select id="attendance" name="attendance" required
-                        style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(30,20,50,.9);color:#fff;font-size:1rem;">
-                        <option value="">Selecciona</option>
-                        <option value="si">Sí, confirmo mi asistencia</option>
-                        <option value="no">No podré asistir</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="attendance">Confirmas tu asistencia? *</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Selecciona...</option>
+                            <option value="si">Si, asistire</option>
+                            <option value="no">No podre asistir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje (Opcional)</label>
+                        <textarea id="message" name="message" placeholder="Dejame un mensaje..."></textarea>
+                    </div>
+                    <div style="text-align:center;">
+                        <button type="submit" style="background:var(--gold);color:#000;border:none;padding:14px 36px;border-radius:25px;font-size:1rem;font-weight:bold;cursor:pointer;">Enviar Confirmacion</button>
+                    </div>
+                </form>
+                <div id="successMessage">
+                    &#10003; &iexcl;Gracias! Tu confirmaci&oacute;n ha sido registrada.
                 </div>
-                <div class="form-group">
-                    <label for="message" style="display:block;margin-bottom:6px;font-size:.9rem;opacity:.8;">Mensaje para Ángel Said (opcional)</label>
-                    <textarea id="message" name="message" rows="3" placeholder="Escribe un mensaje..."
-                        style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:1rem;resize:vertical;"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="margin-top:6px;font-size:1rem;padding:14px;border-radius:30px;">
-                    <i class="fas fa-paper-plane"></i> Enviar Confirmación
-                </button>
-            </form>
+            </div>
+        </section>
 
-            <div id="successMessage" style="display:none;text-align:center;padding:24px;background:rgba(246,173,85,.1);border:1px solid rgba(246,173,85,.4);border-radius:14px;color:#f6ad55;max-width:420px;margin:16px auto 0;"></div>
-        </div>
-    </section>
+        <!-- Footer -->
+        <footer>
+            <p style="font-size: 1.2rem; margin-bottom: 15px;">&iexcl;Nos vemos el 11 de septiembre!</p>
+            <div class="divider" style="margin: 20px auto;"></div>
+            <p>Con cari&ntilde;o, Angel Said</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+                &#10022; 11 de Septiembre de 2026 &#10022;
+            </p>
+        </footer>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer-message">¡Gracias por acompañarme en este día tan especial!</p>
-            <p class="footer-name">Angel Said</p>
-            <p class="footer-date">12 . 09 . 2026</p>
-            <p class="footer-credit">Invitaciones, Fotografía, Video y Dron<br>Foro 7 - Arturo Cruz - 477-920-3776</p>
-        </div>
-    </footer>
+    <script>
+        // Countdown Timer - 11 de septiembre de 2026 a las 14:00 hrs
+        function updateCountdown() {
+            const eventDate = new Date(2026, 8, 11, 14, 0, 0).getTime(); // Mes 8 = Septiembre
+            const now = new Date().getTime();
+            const distance = eventDate - now;
 
-    <script src="script.js"></script>
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="text-align:center;font-size:1.5rem;color:var(--gold);">&iexcl;El evento ya comenz&oacute;! &#x1F389;</p>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+    <!-- Musica de fondo -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="musica-fondo.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicBtn" onclick="toggleMusic()" style="
+        position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+        background: rgba(17,17,17,0.85); backdrop-filter: blur(10px);
+        border: 2px solid var(--gold); border-radius: 50%;
+        width: 50px; height: 50px; cursor: pointer; font-size: 1.3rem;
+        color: var(--gold); transition: all 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+    " title="M&uacute;sica">&#x1F3B5;</button>
+
+    <script>
+        let musicPlaying = false;
+        const audio = document.getElementById('bgMusic');
+        audio.volume = 0.4;
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                audio.pause();
+                document.getElementById('musicBtn').textContent = '\u{1F3B5}';
+                musicPlaying = false;
+            } else {
+                audio.play();
+                document.getElementById('musicBtn').textContent = '\u{1F507}';
+                musicPlaying = true;
+            }
+        }
+
+        // Splash screen
+        const splashBtn = document.getElementById('openInvitation');
+        const splash = document.getElementById('splashScreen');
+        if (splashBtn && splash) {
+            splashBtn.addEventListener('click', () => {
+                splash.classList.add('hidden');
+                audio.play().then(() => {
+                    musicPlaying = true;
+                    document.getElementById('musicBtn').textContent = '\u{1F507}';
+                }).catch(() => {});
+            });
+        }
+    </script>
+
+    <script>window.EVENTO_SLUG='xv-angel-said';</script>
+    <script src="js/evento-loader.js"></script>
     <script src="visitas.js?v=1"></script>
     <script src="js/rsvp-guest.js"></script>
     <script src="js/foro7-footer.js"></script>
-    <script>window.EVENTO_SLUG='xv-anos-angel-said';</script>
-    <script src="js/evento-loader.js"></script>
     <script>
-    (function(){
+    (function () {
         const token = new URLSearchParams(window.location.search).get('inv');
         if (token) return;
         const SB_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
         const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
         const SB_H    = { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Content-Type': 'application/json' };
-        const SLUG    = 'xv-anos-angel-said';
+        const SLUG    = 'xv-angel-said';
+        const WA_NUMS = ['524771175729'];
+        const NOMBRE_EVENTO = 'los XV a\u00f1os de Angel Said';
 
         function buildNombreInputs(count) {
-            var container = document.getElementById('nombresContainer');
-            var group = document.getElementById('nombresGroup');
+            const container = document.getElementById('nombresContainer');
+            const group = document.getElementById('nombresGroup');
             if (!container || !group) return;
             container.innerHTML = '';
-            var numAcomp = Math.max(0, count - 1);
+            const numAcomp = Math.max(0, count - 1);
             group.style.display = numAcomp > 0 ? 'block' : 'none';
-            for (var i = 0; i < numAcomp; i++) {
-                var inp = document.createElement('input');
+            for (let i = 0; i < numAcomp; i++) {
+                const inp = document.createElement('input');
                 inp.type = 'text';
                 inp.className = 'nombre-asistente';
-                inp.placeholder = 'Acompanante ' + (i + 1);
+                inp.placeholder = 'Nombre acompanante ' + (i + 1);
                 inp.style.cssText = 'width:100%;padding:10px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:.95rem;';
                 container.appendChild(inp);
             }
         }
 
-        function attachHandler(){
+        function attachHandler() {
             const form = document.getElementById('rsvpForm');
             if (!form) return;
-            var guestsInput = document.getElementById('guests');
+
+            const guestsInput = document.getElementById('guests');
             if (guestsInput) {
                 guestsInput.addEventListener('change', function(){ buildNombreInputs(parseInt(this.value)||1); });
                 guestsInput.addEventListener('input', function(){ buildNombreInputs(parseInt(this.value)||1); });
                 buildNombreInputs(parseInt(guestsInput.value)||1);
             }
-            form.addEventListener('submit', async function(e){
+
+            form.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                const nombre  = (document.getElementById('name')?.value||'').trim();
-                const pases   = parseInt(document.getElementById('guests')?.value||'1');
+                const nombre  = (document.getElementById('name')?.value || '').trim();
+                const pases   = parseInt(document.getElementById('guests')?.value || '1');
                 const asiste  = document.getElementById('attendance')?.value === 'si';
-                const mensaje = (document.getElementById('message')?.value||'').trim();
-                const nombres = Array.from(document.querySelectorAll('.nombre-asistente')).map(inp => inp.value.trim()).filter(Boolean);
+                const mensaje = (document.getElementById('message')?.value || '').trim();
+                const nombres = Array.from(document.querySelectorAll('.nombre-asistente'))
+                    .map(inp => inp.value.trim()).filter(Boolean);
                 if (!nombre) return;
                 const btn = form.querySelector('button[type="submit"]');
-                if (btn){ btn.disabled=true; btn.textContent='Enviando...'; }
+                if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
                 try {
-                    const evR = await fetch(`${SB_URL}/rest/v1/eventos?slug=eq.${SLUG}&select=id&limit=1`,{headers:SB_H});
+                    const evR = await fetch(`${SB_URL}/rest/v1/eventos?slug=eq.${SLUG}&select=id&limit=1`, { headers: SB_H });
                     const [ev] = await evR.json();
-                    if (ev?.id){
-                        const r_inv = await fetch(`${SB_URL}/rest/v1/invitados`,{method:'POST',headers:{...SB_H,'Prefer':'return=representation'},
-                            body:JSON.stringify({evento_id:ev.id,nombre,pases_asignados:pases,pases_confirmados:pases,asiste,status:asiste?'confirmada':'declinada',mensaje:mensaje||null,fecha_confirmacion:new Date().toISOString()})});
-                        const [inv] = await r_inv.json();
+                    if (ev?.id) {
+                        const invR = await fetch(`${SB_URL}/rest/v1/invitados`, {
+                            method: 'POST',
+                            headers: { ...SB_H, 'Prefer': 'return=representation' },
+                            body: JSON.stringify({
+                                evento_id: ev.id, nombre,
+                                pases_asignados: pases, pases_confirmados: pases,
+                                asiste, status: asiste ? 'confirmada' : 'declinada',
+                                mensaje: mensaje || null,
+                                fecha_confirmacion: new Date().toISOString()
+                            })
+                        });
+                        const [inv] = await invR.json();
                         if (inv?.id && nombres.length) {
-                            await fetch(`${SB_URL}/rest/v1/acompanantes`,{method:'POST',headers:{...SB_H,'Prefer':'return=minimal'},
-                                body:JSON.stringify(nombres.map((n,i)=>({invitado_id:inv.id,nombre:n,orden:i})))});
+                            await fetch(`${SB_URL}/rest/v1/acompanantes`, {
+                                method: 'POST', headers: { ...SB_H, 'Prefer': 'return=minimal' },
+                                body: JSON.stringify(nombres.map((n, i) => ({ invitado_id: inv.id, nombre: n, orden: i })))
+                            });
                         }
                     }
-                } catch(err){}
-                form.style.display='none';
+                } catch (err) {}
+                form.style.display = 'none';
                 const succ = document.getElementById('successMessage');
-                if (succ){ succ.style.display='block'; succ.innerHTML = asiste ? `✓ Gracias ${nombre}! Confirmados ${pases} lugares.` : `✓ Gracias ${nombre} por avisarnos.`; }
+                if (succ) succ.style.display = 'block';
+                const nombresStr = nombres.length ? '\nAsistentes: ' + nombres.join(', ') : '';
+                const txt = asiste
+                    ? `Hola, confirmo mi asistencia a ${NOMBRE_EVENTO}.\nNombre: ${nombre}\nPersonas: ${pases}${nombresStr}${mensaje ? '\nMensaje: ' + mensaje : ''}`
+                    : `Hola, lamentablemente no podre asistir a ${NOMBRE_EVENTO}.\nNombre: ${nombre}${mensaje ? '\nMensaje: ' + mensaje : ''}`;
+                WA_NUMS.forEach(function(num) { window.location.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(txt); });
             });
         }
-        if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',attachHandler);
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attachHandler);
         else attachHandler();
+    })();
+    </script>
+    <script>
+    (function(){
+        var token=new URLSearchParams(window.location.search).get('inv');
+        var btn=document.getElementById('openInvitation');
+        if(btn)btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+        if(!token)return;
+        var SB_URL='https://nzpujmlienzfetqcgsxz.supabase.co';
+        var SB_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
+        fetch(SB_URL+'/rest/v1/invitados?token=eq.'+encodeURIComponent(token)+'&select=nombre,pases_asignados&limit=1',{headers:{'apikey':SB_ANON,'Authorization':'Bearer '+SB_ANON}})
+        .then(function(r){return r.json();})
+        .then(function(rows){
+            if(!rows||!rows.length)return;
+            var g=rows[0];
+            var sub=document.getElementById('splashSubtitle');
+            var dateEl=document.getElementById('splashDate');
+            var gEl=document.getElementById('splashGuest');
+            var pEl=document.getElementById('splashPases');
+            if(sub)sub.textContent='Hola,';
+            document.querySelectorAll('.splash-names,.splash-name,.splash-title').forEach(function(el){el.style.display='none';});
+            if(dateEl)dateEl.style.display='none';
+            var extras=g.pases_asignados-1;
+            if(gEl){gEl.textContent=extras>0?g.nombre+' y '+extras+' mas':g.nombre;gEl.style.display='block';}
+            if(pEl){pEl.textContent='\u{1F3AB} '+g.pases_asignados+' '+(g.pases_asignados===1?'pase':'pases');pEl.style.display='block';}
+            if(btn)btn.textContent='Ver mi Invitacion';
+        }).catch(function(){});
+    })();
+    </script>
+    <script>
+    // Masonry reveal
+    (function() {
+      var items = document.querySelectorAll('.masonry-item');
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function(el, i) { el.style.transitionDelay = (i * 75) + 'ms'; obs.observe(el); });
+    })();
+    // Carousel dots
+    (function() {
+      var scroll = document.getElementById('cardScroll');
+      var dotsWrap = document.getElementById('carouselDots');
+      if (!scroll || !dotsWrap) return;
+      var cards = scroll.querySelectorAll('.photo-card');
+      cards.forEach(function(card, i) {
+        var btn = document.createElement('button');
+        btn.setAttribute('aria-label', 'Foto ' + (i + 1));
+        if (i === 0) btn.classList.add('active');
+        btn.addEventListener('click', function() { card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); });
+        dotsWrap.appendChild(btn);
+      });
+      var dots = dotsWrap.querySelectorAll('button');
+      scroll.addEventListener('scroll', function() {
+        var mid = scroll.scrollLeft + scroll.clientWidth / 2;
+        var closest = 0, minDist = Infinity;
+        cards.forEach(function(card, i) {
+          var dist = Math.abs(card.offsetLeft + card.offsetWidth / 2 - mid);
+          if (dist < minDist) { minDist = dist; closest = i; }
+        });
+        dots.forEach(function(b, i) { b.classList.toggle('active', i === closest); });
+      }, { passive: true });
     })();
     </script>
 </body>

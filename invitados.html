@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion de Invitados - XV Años Angel Said</title>
+    <title>Gestion de Invitados - XV Años</title>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
@@ -17,7 +17,7 @@
         <header class="service-header" style="background: linear-gradient(135deg, #55efc4, #00b894);">
             <div class="service-icon"><i class="fas fa-users"></i></div>
             <h1>Gestion de Invitados</h1>
-            <p>XV Años Angel Said</p>
+            <p>XV A&ntilde;os - Angel Said</p>
         </header>
         <section class="service-section">
             <h2><i class="fas fa-chart-bar"></i> Resumen de Invitados</h2>
@@ -65,7 +65,7 @@
                     <thead><tr>
                         <th>Nombre</th><th>Categoria</th>
                         <th style="text-align:center">Pases</th><th style="text-align:center">Conf.</th>
-                        <th>Mesa</th><th>Status</th><th>Envio / Confirmacion</th>
+                        <th>Acompanantes</th><th>Mesa</th><th>Status</th><th>Envio / Confirmacion</th>
                         <th>WhatsApp / Link</th><th>Acciones</th>
                     </tr></thead>
                     <tbody id="guestsTableBody"></tbody>
@@ -127,12 +127,12 @@
                         </div>
                         <div class="form-group"><label>Mesa Asignada</label><input type="text" id="guestTable" placeholder="Ej: Mesa 5"></div>
                     </div>
-                                        <div class="form-group" id="acompGroup" style="display:none;">
+                    <div class="form-group" id="acompGroup" style="display:none;">
                         <label>Nombres de Acompanantes</label>
                         <small style="color:#999;display:block;margin-bottom:8px;">Escribe los nombres que conozcas, deja vacios los que no sepas</small>
                         <div id="acompContainer"></div>
                     </div>
-<div class="form-group"><label>Notas</label><textarea id="guestNotes" rows="3" placeholder="Alergias, preferencias..."></textarea></div>
+                    <div class="form-group"><label>Notas</label><textarea id="guestNotes" rows="3" placeholder="Alergias, preferencias..."></textarea></div>
                     <div class="modal-footer">
                         <button type="button" class="btn-secondary" onclick="closeGuestModal()">Cancelar</button>
                         <button type="submit" class="btn-save"><i class="fas fa-save"></i> Guardar Invitado</button>
@@ -157,37 +157,39 @@
         .btn-edit{background:#0984e3;color:#fff;border:none;border-radius:6px;padding:5px 9px;cursor:pointer;font-size:.8rem}
         .btn-delete{background:#d63031;color:#fff;border:none;border-radius:6px;padding:5px 9px;cursor:pointer;font-size:.8rem}
         .btn-wa:hover,.btn-copy:hover,.btn-edit:hover,.btn-delete:hover{opacity:.85}
+        .nombres-list{font-size:.75rem;color:#555;line-height:1.4;max-width:160px}
+        .nombres-list span{display:block}
     </style>
     <script>
     window.RSVP_CONFIG = {
-        slug:      'xv-anos-angel-said',
+        slug:      'xv-angel-said',
         baseUrl:   'https://xv-angel-said.invitados.org/',
-        pin:       '2272',
-        eventName: 'XV Años Angel Said'
+        pin:       '7092',
+        eventName: 'XV A\u00f1os Angel Said'
     };
     </script>
     <script src="js/rsvp-admin.js"></script>
 <script src="js/foro7-footer.js"></script>
 <script>
-/* -- Notificaciones de datos pendientes -- */
+/* ── Notificaciones de datos pendientes ── */
 (function(){
   const SB='https://nzpujmlienzfetqcgsxz.supabase.co';
   const AK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
   const H={apikey:AK,Authorization:'Bearer '+AK,'Content-Type':'application/json'};
-  const SLUG='xv-anos-angel-said';
+  const SLUG='xv-angel-said';
   async function checkNotif(){
     try{
-      const er=await fetch(SB+'/rest/v1/eventos?slug=eq.'+SLUG+'&select=id&limit=1',{headers:H});
+      const er=await fetch(`${SB}/rest/v1/eventos?slug=eq.${SLUG}&select=id&limit=1`,{headers:H});
       const [ev]=await er.json(); if(!ev) return;
-      const nr=await fetch(SB+'/rest/v1/notificaciones?evento_id=eq.'+ev.id+'&leida=eq.false&select=id,seccion,campos_actualizados,created_at&order=created_at.desc',{headers:H});
+      const nr=await fetch(`${SB}/rest/v1/notificaciones?evento_id=eq.${ev.id}&leida=eq.false&select=id,seccion,campos_actualizados,created_at&order=created_at.desc`,{headers:H});
       const notifs=await nr.json();
       if(!notifs.length) return;
       const badge=document.createElement('div');
       badge.id='notif-badge';
       badge.style.cssText='position:fixed;top:80px;right:1rem;z-index:9999;background:#7c3aed;color:#fff;border-radius:12px;padding:.8rem 1.2rem;max-width:320px;box-shadow:0 4px 20px rgba(0,0,0,.4);font-size:.85rem;cursor:pointer;';
-      badge.innerHTML='<strong>Notificaciones</strong>';
+      badge.innerHTML=`<strong>🔔 ${notifs.length} actualización${notifs.length>1?'es':''} de datos</strong><br><small style="opacity:.8">${notifs.slice(0,3).map(n=>`${n.seccion}: ${(n.campos_actualizados||[]).join(', ')}`).join('<br>')}</small><br><small style="opacity:.5;margin-top:.3rem;display:block">Toca para marcar como leídas</small>`;
       badge.onclick=async()=>{
-        await fetch(SB+'/rest/v1/notificaciones?evento_id=eq.'+ev.id+'&leida=eq.false',{method:'PATCH',headers:H,body:JSON.stringify({leida:true})});
+        await fetch(`${SB}/rest/v1/notificaciones?evento_id=eq.${ev.id}&leida=eq.false`,{method:'PATCH',headers:H,body:JSON.stringify({leida:true})});
         badge.remove();
       };
       document.body.appendChild(badge);
