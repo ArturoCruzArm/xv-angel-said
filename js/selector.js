@@ -1,106 +1,37 @@
 // ========================================
-// SUPABASE CONFIG
+// SELECTOR DE FOTOS - XV Años Ángel Said Anzueto Arguello
+// La nube vive en js/supabase-api.js (window.SB): protocolo
+// code_version 6 + reloj lógico POR FOTO + realtime.
 // ========================================
-const SUPABASE_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
-const EVENTO_SLUG   = 'xv-sheilyn-guadalupe';
-const SB_HEADERS    = { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}`, 'Content-Type': 'application/json' };
-
-function getSessionId() {
-    const KEY = 'foro7_sid';
-    let sid = localStorage.getItem(KEY);
-    if (!sid) { sid = crypto.randomUUID(); localStorage.setItem(KEY, sid); }
-    return sid;
-}
-const SESSION_ID = getSessionId();
-let eventoIdCache = null;
-let sbDisponible  = true;
-
-async function sbGetEventoId() {
-    if (eventoIdCache) return eventoIdCache;
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/eventos?slug=eq.${EVENTO_SLUG}&select=id&limit=1`, { headers: SB_HEADERS });
-    const [ev] = await r.json();
-    eventoIdCache = ev?.id || null;
-    return eventoIdCache;
-}
-
-async function sbRegistrarVisita(pagina = 'selector') {
-    try {
-        const evento_id = await sbGetEventoId();
-        if (!evento_id) return;
-        await fetch(`${SUPABASE_URL}/rest/v1/visitas`, {
-            method: 'POST',
-            headers: { ...SB_HEADERS, 'Prefer': 'return=minimal' },
-            body: JSON.stringify({ evento_id, pagina, session_id: SESSION_ID })
-        });
-    } catch(e) {}
-}
+const SESSION_ID = (window.SB && SB.SESSION_ID) || 'sin-sesion';
+let sbDisponible = !!window.SB;
 
 // ========================================
-// GLOBAL VARIABLES - XV Años Clara Susana
+// FOTOS - js/photos.js define window.PHOTOS (sólo las de la sesión;
+// las de img/ raíz son de la invitación y no entran aquí).
+// El índice del arreglo ES el foto_index guardado en Supabase.
 // ========================================
-// Lista de fotos generada automáticamente
-// Total: 1111 fotos
-// Generado: 2026-03-29 03:11
-const photos = [
-    "img/2026-03-31-17-28-52-312.webp","img/2026-03-31-17-28-55-708.webp","img/2026-03-31-17-28-57-750.webp","img/2026-03-31-17-29-07-289.webp","img/2026-03-31-17-30-53-700.webp",
-    "img/2026-03-31-17-31-09-321.webp","img/2026-03-31-17-31-12-022.webp","img/DJI_20260331_174156_089.webp","img/DJI_20260331_174207_436.webp","img/DJI_20260331_174214_316.webp",
-    "img/DJI_20260331_174215_457.webp","img/DJI_20260331_174216_729.webp","img/DJI_20260331_174219_209.webp","img/DJI_20260331_174230_126.webp","img/DJI_20260331_174231_809.webp",
-    "img/DJI_20260331_174234_058.webp","img/DJI_20260331_174235_709.webp","img/DJI_20260331_174237_315.webp","img/DJI_20260331_174247_440.webp","img/DJI_20260331_174249_626.webp",
-    "img/DJI_20260331_174251_396.webp","img/DJI_20260331_174253_676.webp","img/DJI_20260331_174258_596.webp","img/DJI_20260331_174305_963.webp","img/DJI_20260331_174314_602.webp",
-    "img/DJI_20260331_174316_280.webp","img/DSC_4919.webp","img/DSC_4920.webp","img/DSC_4924.webp","img/DSC_4925.webp",
-    "img/DSC_4926.webp","img/DSC_4927.webp","img/DSC_4928.webp","img/DSC_4929.webp","img/DSC_4930.webp",
-    "img/DSC_4931.webp","img/DSC_4932.webp","img/DSC_4933.webp","img/DSC_4934.webp","img/DSC_4935.webp",
-    "img/DSC_4936.webp","img/DSC_4937.webp","img/DSC_4938.webp","img/DSC_4939.webp","img/DSC_4940.webp",
-    "img/DSC_4941.webp","img/DSC_4942.webp","img/DSC_4943.webp","img/DSC_4944.webp","img/DSC_4945.webp",
-    "img/DSC_4946.webp","img/DSC_4947.webp","img/DSC_4948.webp","img/DSC_4949.webp","img/DSC_4950.webp",
-    "img/DSC_4951.webp","img/DSC_4952.webp","img/DSC_4953.webp","img/DSC_4954.webp","img/DSC_4955.webp",
-    "img/DSC_4956.webp","img/DSC_4957.webp","img/DSC_4958.webp","img/DSC_4959.webp","img/DSC_4960.webp",
-    "img/DSC_4961.webp","img/DSC_4962.webp","img/DSC_4963.webp","img/DSC_4964.webp","img/DSC_4965.webp",
-    "img/DSC_4966.webp","img/DSC_4967.webp","img/DSC_4968.webp","img/DSC_4969.webp","img/DSC_4970.webp",
-    "img/DSC_4971.webp","img/DSC_4972.webp","img/DSC_4973.webp","img/DSC_4974.webp","img/DSC_4975.webp",
-    "img/DSC_4976.webp","img/DSC_4977.webp","img/DSC_4978.webp","img/DSC_4979.webp","img/DSC_4980.webp",
-    "img/DSC_4981.webp","img/DSC_4982.webp","img/DSC_4983.webp","img/DSC_4984.webp","img/DSC_4985.webp",
-    "img/DSC_4986.webp","img/DSC_4987.webp","img/DSC_4988.webp","img/DSC_4989.webp","img/DSC_4990.webp",
-    "img/DSC_4991.webp","img/DSC_4992.webp","img/DSC_4993.webp","img/DSC_4994.webp","img/DSC_4995.webp",
-    "img/DSC_4996.webp","img/DSC_4997.webp","img/DSC_4998.webp","img/DSC_4999.webp","img/DSC_5000.webp",
-    "img/DSC_5001.webp","img/DSC_5003.webp","img/DSC_5004.webp","img/DSC_5005.webp","img/DSC_5006.webp",
-    "img/DSC_5007.webp","img/DSC_5008.webp","img/DSC_5009.webp","img/DSC_5010.webp","img/DSC_5011.webp",
-    "img/DSC_5012.webp","img/DSC_5013.webp","img/DSC_5014.webp","img/DSC_5015.webp","img/DSC_5016.webp",
-    "img/DSC_5017.webp","img/DSC_5018.webp","img/DSC_5019.webp","img/DSC_5020.webp","img/DSC_5021.webp",
-    "img/DSC_5023.webp","img/DSC_5024.webp","img/DSC_5025.webp","img/DSC_5026.webp","img/DSC_5027.webp",
-    "img/DSC_5029.webp","img/DSC_5030.webp","img/DSC_5031.webp","img/DSC_5032.webp","img/DSC_5033.webp",
-    "img/DSC_5034.webp","img/DSC_5035.webp","img/DSC_5036.webp","img/DSC_5037.webp","img/DSC_5038.webp",
-    "img/DSC_5039.webp","img/DSC_5040.webp","img/DSC_5041.webp","img/DSC_5042.webp","img/DSC_5043.webp",
-    "img/DSC_5045.webp","img/DSC_5046.webp","img/DSC_5047.webp","img/DSC_5048.webp","img/DSC_5049.webp",
-    "img/DSC_5050.webp","img/DSC_5051.webp","img/DSC_5052.webp","img/DSC_5053.webp","img/DSC_5054.webp",
-    "img/DSC_5055.webp","img/DSC_5056.webp","img/DSC_5057.webp","img/DSC_5058.webp","img/DSC_5059.webp",
-    "img/DSC_5060.webp","img/DSC_5061.webp","img/DSC_5062.webp","img/DSC_5063.webp","img/DSC_5064.webp",
-    "img/DSC_5065.webp","img/DSC_5066.webp","img/DSC_5067.webp","img/DSC_5068.webp","img/DSC_5069.webp",
-    "img/DSC_5070.webp","img/DSC_5071.webp","img/DSC_5072.webp","img/DSC_5073.webp","img/DSC_5074.webp",
-    "img/DSC_5075.webp","img/DSC_5076.webp","img/DSC_5077.webp","img/DSC_5078.webp","img/DSC_5079.webp",
-    "img/DSC_5080.webp","img/DSC_5081.webp","img/DSC_5082.webp","img/DSC_5083.webp","img/DSC_5084.webp",
-    "img/DSC_5085.webp","img/DSC_5086.webp","img/DSC_5087.webp","img/DSC_5088.webp","img/DSC_5089.webp",
-    "img/DSC_5090.webp","img/DSC_5091.webp","img/DSC_5092.webp","img/DSC_5093.webp","img/DSC_5094.webp",
-    "img/DSC_5095.webp","img/DSC_5096.webp","img/DSC_5097.webp","img/DSC_5098.webp","img/DSC_5099.webp",
-    "img/DSC_5101.webp","img/img 2.webp","img/img1.webp"
-];
+const PHOTO_FILES = window.PHOTOS || [];
+const DIR_FULL    = window.PHOTOS_DIR       || 'img/sesion/';
+const DIR_THUMB   = window.PHOTOS_THUMB_DIR || 'img/sesion/thumb/';
+const photos      = PHOTO_FILES.map(f => DIR_FULL  + f);   // resolución completa (modal)
+const thumbs      = PHOTO_FILES.map(f => DIR_THUMB + f);   // miniatura (galería)
 
-// ── Configuración del evento ──
+// ── Configuración del evento (único lugar para cambiar datos del contrato) ──
 const CONFIG = {
-    slug:               'xv-sheilyn-guadalupe',
-    nombre:             (window.EVENT_CONFIG && window.EVENT_CONFIG.nombre)             || 'Clara Susana Palomares Torres',
+    slug:               'xv-anos-angel-said',
+    nombre:             (window.EVENT_CONFIG && window.EVENT_CONFIG.nombre)             || 'Ángel Said Anzueto Arguello',
     telefono:           (window.EVENT_CONFIG && window.EVENT_CONFIG.telefono)           || '',
-    fechaEvento:        (window.EVENT_CONFIG && window.EVENT_CONFIG.fechaEvento)        || new Date(2026, 2, 28, 17, 0, 0),
-    limiteImpresion:    200,
+    fechaEvento:        (window.EVENT_CONFIG && window.EVENT_CONFIG.fechaEvento)        || new Date(2026, 8, 12, 17, 0, 0),
+    limiteImpresion:    100,
     limiteInvitacion:   null,
     costoFotoAdicional: (window.EVENT_CONFIG && window.EVENT_CONFIG.costoFotoAdicional) || 15,
 };
 
-const STORAGE_KEY = 'xv_anos_clara_susana_photo_selections';
-const KEY_FILTER   = 'xv_filter';
-const KEY_SCROLL   = 'xv_scroll';
-const KEY_LAST     = 'xv_last_photo';
+const STORAGE_KEY = 'xv_anos_angel_said_photo_selections';
+const KEY_FILTER   = 'angel_said_filter';
+const KEY_SCROLL   = 'angel_said_scroll';
+const KEY_LAST     = 'angel_said_last_photo';
 const LIMITES = {
     impresion: CONFIG.limiteImpresion,
     invitacion: CONFIG.limiteInvitacion
@@ -130,9 +61,67 @@ function mostrarBannerSinSeleccion() {
     document.body.insertBefore(banner, document.body.firstChild);
 }
 
+/* Guarda sólo en el navegador (respaldo instantáneo y modo offline). */
+function saveSelections() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(photoSelections));
+    } catch(e) {
+        showToast('Error al guardar. Verifica el espacio del navegador.', 'error');
+    }
+}
+
+/* Fotos con escritura en vuelo: un refresco no debe revertirlas
+   mientras el POST viaja. */
+const escriturasPendientes = new Set();
+
+/* Sube UNA foto a Supabase (reloj lógico + verificación de escritura).
+   Nunca se manda el estado completo: así una sesión no puede pisar
+   las fotos que eligió otra. */
+function persistirFoto(idx) {
+    saveSelections();
+    if (!sbDisponible) return;
+
+    escriturasPendientes.add(idx);
+    const sel = photoSelections[idx];
+    const tarea = (sel && SB.tieneAlgo(sel))
+        ? SB.guardarFoto(idx, sel, PHOTO_FILES[idx])
+        : SB.borrarFoto(idx);
+
+    tarea.then(res => {
+        if (res === 'conflicto') showToast('Esta foto la está editando otro dispositivo', 'error');
+    }).catch(e => {
+        console.warn('[Supabase] foto ' + idx + ':', e.message);
+        showToast('Sin conexión: guardado sólo en este dispositivo', 'error');
+    }).finally(() => {
+        escriturasPendientes.delete(idx);
+    });
+}
+
+/* Sube en orden las fotos que este dispositivo tenía pendientes
+   (selecciones viejas de localStorage o hechas sin conexión). */
+async function subirPendientes(indices) {
+    // Se marcan TODAS desde el principio: mientras la cola avanza puede
+    // entrar un refresco, y sin esto borraría de la pantalla las fotos
+    // que todavía no alcanzan a subir.
+    indices.forEach(i => escriturasPendientes.add(i));
+    for (const idx of indices) {
+        const sel = photoSelections[idx];
+        try {
+            if (sel && SB.tieneAlgo(sel)) await SB.guardarFoto(idx, sel, PHOTO_FILES[idx]);
+            else                          await SB.borrarFoto(idx);
+        } catch (e) { console.warn('[Supabase] pendiente ' + idx + ':', e.message); }
+        finally { escriturasPendientes.delete(idx); }
+    }
+}
+
+/* Carga desde la nube.
+   - Inicial: muestra localStorage al instante y luego fusiona FOTO POR
+     FOTO comparando el reloj local contra el remoto. Lo que este
+     dispositivo tenía y la nube no conoce, se sube.
+   - Refresco (isPoll): adopta la nube, respetando las fotos con
+     escritura en vuelo. */
 async function loadSelections(isPoll = false) {
     if (!isPoll) {
-        // Carga inicial: mostrar localStorage de inmediato (cero latencia)
         try {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) photoSelections = JSON.parse(saved);
@@ -141,87 +130,152 @@ async function loadSelections(isPoll = false) {
 
     if (!sbDisponible) return;
     try {
-        const evento_id = await sbGetEventoId();
-        if (!evento_id) { sbDisponible = false; return; }
+        const filas = await SB.fetchFilas();      // aún no toca los relojes locales
 
-        const r = await fetch(
-            `${SUPABASE_URL}/rest/v1/selecciones?evento_id=eq.${evento_id}&select=foto_index,impresion,invitacion,descartada,ampliacion,datos`,
-            { headers: SB_HEADERS }
-        );
-        if (!r.ok) throw new Error(r.status);
-        const rows = await r.json();
-
-        const sb = {};
-        rows.forEach(row => {
-            const d = row.datos || {};
-            if (row.impresion || row.invitacion || row.descartada || row.ampliacion || d.caja_fotos || d.caja_usb)
-                sb[row.foto_index] = {
-                    impresion: row.impresion, invitacion: row.invitacion,
-                    descartada: row.descartada, ampliacion: row.ampliacion,
-                    caja_fotos: d.caja_fotos || false, caja_usb: d.caja_usb || false
-                };
-        });
-
-            if (!isPoll) {
-            // Carga inicial: merge y migrar localStorage a Supabase para que otros lo vean
-            const merged = {...sb};
-            Object.entries(photoSelections).forEach(([idx, sel]) => {
-                if (sel.impresion || sel.invitacion || sel.descartada || sel.ampliacion || sel.caja_fotos || sel.caja_usb) merged[idx] = sel;
+        if (!isPoll) {
+            const remoto = {}, relojRemoto = {};
+            filas.forEach(f => {
+                relojRemoto[f.idx] = f.clock;
+                if (!f.deleted && SB.tieneAlgo(f.sel)) remoto[f.idx] = f.sel;
             });
-            photoSelections = merged;
-            if (Object.keys(photoSelections).length > 0) {
-                sbSyncSelections().catch(e => console.warn('[Supabase] Migración:', e.message));
-            }
-            sbRegistrarVisita('selector');
+
+            const local  = photoSelections;
+            const fusion = {};
+            const subir  = [];
+            const indices = new Set([...Object.keys(local), ...Object.keys(relojRemoto)]);
+
+            indices.forEach(k => {
+                const idx        = Number(k);
+                const selLocal   = local[k];
+                const tieneLocal = !!(selLocal && SB.tieneAlgo(selLocal));
+                const rc         = Number(relojRemoto[idx] || 0);
+                const lc         = SB.relojDe(idx);
+
+                if (lc > rc) {
+                    // Este dispositivo va adelantado: su cambio nunca llegó.
+                    if (tieneLocal) fusion[idx] = SB.normalizar(selLocal);
+                    subir.push(idx);
+                } else if (rc > 0) {
+                    // La nube manda (incluye el borrado suave: no entra a fusion).
+                    if (remoto[idx]) fusion[idx] = remoto[idx];
+                } else if (tieneLocal) {
+                    // Selección vieja, guardada antes de existir el reloj.
+                    fusion[idx] = SB.normalizar(selLocal);
+                    subir.push(idx);
+                }
+            });
+
+            photoSelections = fusion;
+            filas.forEach(f => SB.recordarReloj(f.idx, f.clock));
+
+            if (subir.length) subirPendientes(subir);
+            SB.registrarVisita('selector');
             mostrarBannerSinSeleccion();
-        } else {
-            // Polling: Supabase es la verdad compartida, reemplaza estado local
-            photoSelections = sb;
-        }
-
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(photoSelections)); } catch(e) {}
-        if (isPoll) {
-            const oldSels = {};
-            try { Object.assign(oldSels, JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')); } catch(e) {}
-            const allIdx = new Set([...Object.keys(sb), ...Object.keys(oldSels)].map(Number));
-            allIdx.forEach(idx => {
-                if (JSON.stringify(oldSels[idx] || {}) !== JSON.stringify(sb[idx] || {})) updateCard(idx);
-            });
-            updateStats(); updateFilterButtons();
-        } else {
+            saveSelections();
             renderGallery(); setupLazyLoad(); updateStats(); updateFilterButtons();
+        } else {
+            const nube = {};
+            filas.forEach(f => {
+                SB.recordarReloj(f.idx, f.clock);
+                if (!f.deleted && SB.tieneAlgo(f.sel)) nube[f.idx] = f.sel;
+            });
+            // Las fotos con escritura en vuelo conservan el valor local.
+            escriturasPendientes.forEach(idx => {
+                if (photoSelections[idx]) nube[idx] = photoSelections[idx];
+                else delete nube[idx];
+            });
+
+            // Sólo se repintan las tarjetas que de verdad cambiaron: así el
+            // refresco no interrumpe el scroll ni la carga de miniaturas.
+            const cambiadas = [];
+            new Set([...Object.keys(photoSelections), ...Object.keys(nube)]).forEach(k => {
+                if (!mismaSeleccion(photoSelections[k], nube[k])) cambiadas.push(Number(k));
+            });
+            if (!cambiadas.length) return;
+
+            photoSelections = nube;
+            saveSelections();
+            cambiadas.forEach(updateCard);
+            updateStats(); updateFilterButtons();
+            if (modalOpen && cambiadas.includes(currentPhotoIndex)) refrescarBotonesModal();
         }
     } catch(e) {
         console.warn('[Supabase] Usando localStorage:', e.message);
         sbDisponible = false;
+        actualizarEstadoNube('offline');
     }
 }
 
-async function saveSelections() {
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(photoSelections));
-    } catch(e) {
-        showToast('Error al guardar. Verifica el espacio del navegador.', 'error');
+/* ========================================
+   REALTIME: cambios de otras sesiones activas
+   ======================================== */
+function aplicarCambioRemoto(c) {
+    // Nuestro propio eco: ya está aplicado en pantalla.
+    if (c.propia) return;
+
+    if (c.tipo === 'delete') {
+        // Sólo ocurre con "Limpiar Todo" (borrado duro).
+        if (photoSelections[c.idx]) {
+            delete photoSelections[c.idx];
+            saveSelections();
+            updateCard(c.idx); updateStats(); updateFilterButtons();
+        }
+        return;
     }
-    if (!sbDisponible) return;
-    sbSyncSelections().catch(e => console.warn('[Supabase] Sync error:', e.message));
+
+    // El reloj decide: una sesión vieja no puede revivir un estado anterior.
+    if (!c.clock || c.clock <= SB.relojDe(c.idx)) return;
+    SB.recordarReloj(c.idx, c.clock);
+
+    if (c.borrada || !SB.tieneAlgo(c.sel)) delete photoSelections[c.idx];
+    else                                   photoSelections[c.idx] = c.sel;
+
+    saveSelections();
+    updateCard(c.idx); updateStats(); updateFilterButtons();
+
+    // Si esa foto está abierta en el modal, reflejar el cambio ahí también.
+    if (modalOpen && currentPhotoIndex === c.idx) refrescarBotonesModal();
+    avisarCambioRemoto();
 }
 
-async function sbSyncSelections() {
-    const snapshot = {...photoSelections}; // snapshot BEFORE any await
-    const evento_id = await sbGetEventoId();
-    if (!evento_id) return;
-    const rows = Object.entries(snapshot).map(([idx, sel]) => ({
-        evento_id, session_id: SESSION_ID, foto_index: parseInt(idx),
-        impresion: sel.impresion || false, invitacion: sel.invitacion || false,
-        descartada: sel.descartada || false, ampliacion: sel.ampliacion || false,
-        datos: { caja_fotos: sel.caja_fotos || false, caja_usb: sel.caja_usb || false },
-    }));
-    if (rows.length === 0) return;
-    await fetch(`${SUPABASE_URL}/rest/v1/selecciones?on_conflict=evento_id,foto_index`, {
-        method: 'POST',
-        headers: { ...SB_HEADERS, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
-        body: JSON.stringify(rows)
+/* Vuelve a pintar los botones del modal con lo que hay en memoria. */
+function refrescarBotonesModal() {
+    const actual = photoSelections[currentPhotoIndex] || {};
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.toggle('selected', actual[btn.dataset.category] === true);
+    });
+}
+
+let avisoTimer = null;
+function avisarCambioRemoto() {
+    clearTimeout(avisoTimer);
+    avisoTimer = setTimeout(() => showToast('Actualizado desde otro dispositivo', 'success'), 400);
+}
+
+function actualizarEstadoNube(estado) {
+    const el = document.getElementById('estadoNube');
+    if (!el) return;
+    const mapa = {
+        online:  { txt: '🟢 Sincronizado en vivo', color: '#2e7d32' },
+        polling: { txt: '🟡 Sincronizado (cada 20 s)', color: '#ef6c00' },
+        offline: { txt: '🔴 Sin conexión — sólo este dispositivo', color: '#c62828' }
+    };
+    const m = mapa[estado] || mapa.polling;
+    el.textContent = m.txt;
+    el.style.color = m.color;
+}
+
+function iniciarRealtime() {
+    if (!sbDisponible) { actualizarEstadoNube('offline'); return; }
+    actualizarEstadoNube('polling');
+    SB.suscribirRealtime(aplicarCambioRemoto, estado => {
+        if (estado === 'SUBSCRIBED') {
+            actualizarEstadoNube('online');
+            loadSelections(true);          // ponerse al día tras (re)conectar
+        } else if (estado === 'CHANNEL_ERROR' || estado === 'TIMED_OUT' ||
+                   estado === 'CLOSED'        || estado === 'SIN_LIBRERIA') {
+            actualizarEstadoNube('polling');
+        }
     });
 }
 
@@ -233,15 +287,11 @@ function swipeSaveAndNext() {
         selectedCategories[btn.dataset.category] = btn.classList.contains('selected');
         if (btn.classList.contains('selected')) hasAnySelection = true;
     });
-    if (hasAnySelection) {
-        photoSelections[currentPhotoIndex] = selectedCategories;
-    } else {
-        const idx = currentPhotoIndex;
-        delete photoSelections[idx];
-        if (sbDisponible) sbDeleteSelection(idx).catch(e => console.warn('[Supabase] Delete:', e.message));
-    }
-    saveSelections();
-    updateCard(currentPhotoIndex);
+    const idx = currentPhotoIndex;
+    if (hasAnySelection) photoSelections[idx] = selectedCategories;
+    else                 delete photoSelections[idx];
+    persistirFoto(idx);
+    updateCard(idx);
     updateStats();
     updateFilterButtons();
     navigatePhoto('next');
@@ -253,8 +303,7 @@ function swipeClearAndNext() {
     const idx = currentPhotoIndex;
     if (photoSelections[idx]) {
         delete photoSelections[idx];
-        if (sbDisponible) sbDeleteSelection(idx).catch(e => console.warn('[Supabase] Delete:', e.message));
-        saveSelections();
+        persistirFoto(idx);
         updateCard(idx);
         updateStats();
         updateFilterButtons();
@@ -264,28 +313,12 @@ function swipeClearAndNext() {
     showToast('Selección quitada', 'success');
 }
 
-async function sbDeleteSelection(foto_index) {
-    const evento_id = await sbGetEventoId();
-    if (!evento_id) return;
-    await fetch(
-        `${SUPABASE_URL}/rest/v1/selecciones?evento_id=eq.${evento_id}&foto_index=eq.${foto_index}`,
-        { method: 'DELETE', headers: SB_HEADERS }
-    );
-}
-
 async function clearAllSelections() {
-    if (confirm('¿Estás seguro de que quieres borrar TODAS las selecciones? Esta acción no se puede deshacer.')) {
-        // Borrar de Supabase primero
+    if (confirm('¿Estás seguro de que quieres borrar TODAS las selecciones? Esta acción no se puede deshacer.\n\nOJO: también se borran en los demás dispositivos.')) {
+        // Borrado duro en Supabase (el trigger del reloj no aplica a DELETE)
         if (sbDisponible) {
-            try {
-                const evento_id = await sbGetEventoId();
-                if (evento_id) {
-                    await fetch(
-                        `${SUPABASE_URL}/rest/v1/selecciones?evento_id=eq.${evento_id}`,
-                        { method: 'DELETE', headers: SB_HEADERS }
-                    );
-                }
-            } catch(e) { console.warn('[Supabase] Error al borrar:', e.message); }
+            try { await SB.borrarTodas(); }
+            catch(e) { console.warn('[Supabase] Error al borrar:', e.message); }
         }
         photoSelections = {};
         try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
@@ -302,18 +335,16 @@ async function clearAllSelections() {
 // ========================================
 function getStats() {
     const stats = {
-        impresion: 0, invitacion: 0, descartada: 0, ampliacion: 0,
-        caja_fotos: null, caja_usb: null,
+        impresion: 0,
+        invitacion: 0,
+        descartada: 0,
         sinClasificar: photos.length
     };
 
-    Object.entries(photoSelections).forEach(([idx, selection]) => {
-        if (selection.impresion)  stats.impresion++;
+    Object.values(photoSelections).forEach(selection => {
+        if (selection.impresion) stats.impresion++;
         if (selection.invitacion) stats.invitacion++;
         if (selection.descartada) stats.descartada++;
-        if (selection.ampliacion) stats.ampliacion++;
-        if (selection.caja_fotos) stats.caja_fotos = parseInt(idx);
-        if (selection.caja_usb)   stats.caja_usb   = parseInt(idx);
     });
 
     stats.sinClasificar = photos.length - Object.keys(photoSelections).length;
@@ -329,9 +360,6 @@ function updateStats() {
     document.getElementById('countInvitacion').textContent = stats.invitacion;
     document.getElementById('countDescartada').textContent = stats.descartada;
     document.getElementById('countSinClasificar').textContent = stats.sinClasificar;
-    document.getElementById('countAmpliacion').textContent = stats.ampliacion;
-    document.getElementById('countCajaFotos').textContent = stats.caja_fotos !== null ? `#${stats.caja_fotos + 1}` : '—';
-    document.getElementById('countCajaUsb').textContent   = stats.caja_usb   !== null ? `#${stats.caja_usb   + 1}` : '—';
 
     const fotosAdicionales = Math.max(0, stats.impresion - LIMITES.impresion);
     const costoExtra = fotosAdicionales * COSTO_FOTO_ADICIONAL;
@@ -348,7 +376,6 @@ function updateStats() {
     }
 
     const impresionCard = document.querySelector('.stat-card.impresion');
-
     if (impresionCard) {
         if (stats.impresion > LIMITES.impresion) {
             impresionCard.style.borderColor = '#ff9800';
@@ -373,7 +400,7 @@ function renderGallery() {
     grid.innerHTML = '';
 
     if (photos.length === 0) {
-        grid.innerHTML = '<div class="no-photos-message">Las fotos estarán disponibles después del evento (28 de marzo de 2026)</div>';
+        grid.innerHTML = '<div class="no-photos-message">Las fotos estarán disponibles después del evento (12 de septiembre de 2026)</div>';
         return;
     }
 
@@ -391,12 +418,8 @@ function renderGallery() {
             const categories = [];
             if (selection.impresion) categories.push('impresion');
             if (selection.invitacion) categories.push('invitacion');
-
-            if (categories.length > 1) {
-                card.classList.add('has-multiple');
-            } else if (categories.length === 1) {
-                card.classList.add(`has-${categories[0]}`);
-            }
+            if (categories.length > 1) card.classList.add('has-multiple');
+            else if (categories.length === 1) card.classList.add(`has-${categories[0]}`);
         }
 
         let badgesHTML = '';
@@ -411,7 +434,7 @@ function renderGallery() {
         const displayNumber = `Foto ${index + 1}`;
         const mediaHTML = `
             <div class="photo-image-container">
-                <img data-src="${photo}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'/%3E" alt="${displayNumber}" class="lazy-img">
+                <img data-src="${thumbs[index]}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'/%3E" alt="${displayNumber}" class="lazy-img" loading="lazy" decoding="async" width="400" height="300">
             </div>
         `;
 
@@ -429,7 +452,7 @@ function renderGallery() {
 }
 
 // ========================================
-// LAZY LOADER CON COLA (máx 4 concurrentes — evita throttle de GitHub en iOS)
+// LAZY LOADER CON COLA (máx 4 concurrentes)
 // ========================================
 let lazyObserver = null;
 let lazyQueue = [];
@@ -475,30 +498,17 @@ function setupLazyLoad() {
 // ========================================
 function applyFilter() {
     const cards = document.querySelectorAll('.photo-card');
-
     cards.forEach(card => {
         const index = parseInt(card.dataset.index);
         const selection = photoSelections[index] || {};
         let show = false;
-
         switch (currentFilter) {
-            case 'all':
-                show = true;
-                break;
-            case 'impresion':
-                show = selection.impresion === true;
-                break;
-            case 'invitacion':
-                show = selection.invitacion === true;
-                break;
-            case 'descartada':
-                show = selection.descartada === true;
-                break;
-            case 'sin-clasificar':
-                show = !selection.impresion && !selection.invitacion && !selection.descartada;
-                break;
+            case 'all': show = true; break;
+            case 'impresion': show = selection.impresion === true; break;
+            case 'invitacion': show = selection.invitacion === true; break;
+            case 'descartada': show = selection.descartada === true; break;
+            case 'sin-clasificar': show = !selection.impresion && !selection.invitacion && !selection.descartada; break;
         }
-
         card.classList.toggle('hidden', !show);
     });
 }
@@ -506,21 +516,14 @@ function applyFilter() {
 function setFilter(filter) {
     currentFilter = filter;
     applyFilter();
-
-    document.querySelectorAll('.btn-filter').forEach(btn => {
-        btn.classList.remove('active');
-    });
-
+    document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.querySelector(`[data-filter="${filter}"]`);
-    if (activeBtn) {
-        activeBtn.classList.add('active');
-    }
+    if (activeBtn) activeBtn.classList.add('active');
     try { localStorage.setItem(KEY_FILTER, filter); } catch (e) {}
 }
 
 function updateFilterButtons() {
     const stats = getStats();
-
     const btnAll = document.getElementById('btnFilterAll');
     const btnImpresion = document.getElementById('btnFilterImpresion');
     const btnInvitacion = document.getElementById('btnFilterInvitacion');
@@ -534,15 +537,6 @@ function updateFilterButtons() {
     if (btnSinClasificar) btnSinClasificar.textContent = `Sin Clasificar (${stats.sinClasificar})`;
 }
 
-// ── Preload pool ──
-const _preloadCache = new Map();
-function _preloadImg(url) {
-    if (_preloadCache.has(url)) return;
-    const img = new Image();
-    img.src = url;
-    _preloadCache.set(url, img);
-}
-
 // ========================================
 // MODAL FUNCTIONS
 // ========================================
@@ -550,19 +544,21 @@ function openModal(index) {
     currentPhotoIndex = index;
     try { localStorage.setItem(KEY_LAST, index); } catch (e) {}
     const modal = document.getElementById('photoModal');
-    const modalImageContainer = document.querySelector('.modal-image-container');
     const modalPhotoNumber = document.getElementById('modalPhotoNumber');
 
     const photo = photos[index];
     const displayNumber = `Foto ${index + 1}`;
 
     modalPhotoNumber.textContent = displayNumber;
-
-    document.getElementById('modalImage').src = photo;
-    document.getElementById('modalImage').alt = displayNumber;
+    const modalImg = document.getElementById('modalImage');
+    modalImg.alt = displayNumber;
+    // Miniatura al instante y foto completa en cuanto termine de bajar.
+    modalImg.src = thumbs[index];
+    const completa = new Image();
+    completa.onload = () => { if (currentPhotoIndex === index) modalImg.src = photo; };
+    completa.src = photo;
 
     const selection = photoSelections[index] || {};
-
     document.querySelectorAll('.option-btn').forEach(btn => {
         const category = btn.dataset.category;
         btn.classList.toggle('selected', selection[category] === true);
@@ -570,69 +566,61 @@ function openModal(index) {
 
     modal.classList.add('active');
     updateNavigationButtons();
-
     modalOpen = true;
     document.body.style.overflow = 'hidden';
-
-    // Precargar anterior y siguiente
-    const next = photos[(index + 1) % photos.length];
-    const prev = photos[(index - 1 + photos.length) % photos.length];
-    setTimeout(() => { _preloadImg(next); _preloadImg(prev); }, 50);
 }
 
 function closeModal() {
     const modal = document.getElementById('photoModal');
     modal.classList.remove('active');
-
     document.body.style.overflow = '';
     modalOpen = false;
-
     currentPhotoIndex = null;
 }
 
-// ========================================
-// NAVIGATION FUNCTIONS
-// ========================================
 function navigatePhoto(direction) {
     if (currentPhotoIndex === null) return;
-
     let newIndex;
     if (direction === "next") {
         newIndex = currentPhotoIndex + 1;
-        if (newIndex >= photos.length) {
-            newIndex = 0;
-        }
-    } else if (direction === "prev") {
+        if (newIndex >= photos.length) newIndex = 0;
+    } else {
         newIndex = currentPhotoIndex - 1;
-        if (newIndex < 0) {
-            newIndex = photos.length - 1;
-        }
+        if (newIndex < 0) newIndex = photos.length - 1;
     }
-
     saveCurrentSelections();
     openModal(newIndex);
 }
 
+/* ¿Cambió realmente la selección? Evita escribir en la nube cada vez
+   que se pasa de foto sin tocar nada. */
+function mismaSeleccion(a, b) {
+    const A = a || {}, B = b || {};
+    return ['impresion', 'invitacion', 'descartada']
+        .every(c => !!A[c] === !!B[c]);
+}
+
+function leerBotonesModal() {
+    const sel = {};
+    let alguna = false;
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        const marcado = btn.classList.contains('selected');
+        sel[btn.dataset.category] = marcado;
+        if (marcado) alguna = true;
+    });
+    return { sel, alguna };
+}
+
 function saveCurrentSelections() {
     if (currentPhotoIndex === null) return;
+    const idx = currentPhotoIndex;
+    const { sel, alguna } = leerBotonesModal();
+    if (mismaSeleccion(photoSelections[idx], alguna ? sel : null)) return;
 
-    const selectedCategories = {};
-    let hasAnySelection = false;
-
-    document.querySelectorAll(".option-btn").forEach(btn => {
-        const category = btn.dataset.category;
-        const isSelected = btn.classList.contains("selected");
-        selectedCategories[category] = isSelected;
-        if (isSelected) hasAnySelection = true;
-    });
-
-    if (hasAnySelection) {
-        photoSelections[currentPhotoIndex] = selectedCategories;
-    } else {
-        delete photoSelections[currentPhotoIndex];
-    }
-
-    saveSelections();
+    if (alguna) photoSelections[idx] = sel;
+    else        delete photoSelections[idx];
+    persistirFoto(idx);
+    updateCard(idx);
     updateStats();
     updateFilterButtons();
 }
@@ -640,7 +628,6 @@ function saveCurrentSelections() {
 function updateNavigationButtons() {
     const btnPrev = document.getElementById("btnPrevPhoto");
     const btnNext = document.getElementById("btnNextPhoto");
-
     if (btnPrev && btnNext) {
         btnPrev.disabled = false;
         btnNext.disabled = false;
@@ -650,11 +637,8 @@ function updateNavigationButtons() {
 function updateCard(index) {
     const card = document.querySelector(`.photo-card[data-index="${index}"]`);
     if (!card) return;
-
     const selection = photoSelections[index] || {};
     const hasAny = selection.impresion || selection.invitacion || selection.descartada;
-
-    // Recalcular clases de color
     card.className = 'photo-card';
     if (selection.descartada) {
         card.classList.add('has-descartada');
@@ -665,8 +649,6 @@ function updateCard(index) {
         if (cats.length > 1) card.classList.add('has-multiple');
         else if (cats.length === 1) card.classList.add(`has-${cats[0]}`);
     }
-
-    // Actualizar badges sin tocar el <img>
     const existing = card.querySelector('.photo-badges');
     if (existing) existing.remove();
     if (hasAny) {
@@ -677,8 +659,6 @@ function updateCard(index) {
         if (selection.descartada) badges.innerHTML += '<span class="badge badge-descartada">❌ Descartada</span>';
         card.appendChild(badges);
     }
-
-    // Aplicar filtro actual
     let show = false;
     switch (currentFilter) {
         case 'all': show = true; break;
@@ -692,40 +672,17 @@ function updateCard(index) {
 
 function saveModalSelection() {
     if (currentPhotoIndex === null) return;
+    const idx = currentPhotoIndex;
+    const { sel, alguna } = leerBotonesModal();
 
-    const selectedCategories = {};
-    let hasAnySelection = false;
-
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        const category = btn.dataset.category;
-        const isSelected = btn.classList.contains('selected');
-        selectedCategories[category] = isSelected;
-        if (isSelected) hasAnySelection = true;
-    });
-
-    // Radio behavior: caja_fotos y caja_usb solo pueden estar en 1 foto
-    ['caja_fotos', 'caja_usb'].forEach(excl => {
-        if (selectedCategories[excl]) {
-            Object.keys(photoSelections).forEach(idx => {
-                if (parseInt(idx) !== currentPhotoIndex && photoSelections[idx][excl]) {
-                    photoSelections[idx][excl] = false;
-                    updateCard(parseInt(idx));
-                }
-            });
-        }
-    });
-
-    if (hasAnySelection) {
-        photoSelections[currentPhotoIndex] = selectedCategories;
-    } else {
-        delete photoSelections[currentPhotoIndex];
-        if (sbDisponible) sbDeleteSelection(currentPhotoIndex).catch(e => console.warn('[Supabase] Delete:', e.message));
+    if (!mismaSeleccion(photoSelections[idx], alguna ? sel : null)) {
+        if (alguna) photoSelections[idx] = sel;
+        else        delete photoSelections[idx];
+        persistirFoto(idx);
+        updateCard(idx);
+        updateStats();
+        updateFilterButtons();
     }
-
-    saveSelections();
-    updateCard(currentPhotoIndex);   // solo actualiza esa tarjeta, sin recargar imágenes
-    updateStats();
-    updateFilterButtons();
     closeModal();
     showToast('Selección guardada correctamente', 'success');
 }
@@ -733,58 +690,18 @@ function saveModalSelection() {
 // ========================================
 // EXPORT FUNCTIONS
 // ========================================
-function exportToJSON() {
-    const stats = getStats();
-    const fotosAdicionales = Math.max(0, stats.impresion - LIMITES.impresion);
-    const costoExtra = fotosAdicionales * COSTO_FOTO_ADICIONAL;
-
-    const exportData = {
-        evento: 'XV Años - Clara Susana Palomares Torres',
-        fecha_exportacion: new Date().toISOString(),
-        total_fotos: photos.length,
-        estadisticas: stats,
-        fotos_incluidas: LIMITES.impresion,
-        fotos_adicionales: fotosAdicionales,
-        costo_adicional: costoExtra,
-        selecciones: []
-    };
-
-    photos.forEach((photo, index) => {
-        const selection = photoSelections[index];
-        if (selection && (selection.impresion || selection.invitacion || selection.descartada)) {
-            exportData.selecciones.push({
-                numero_foto: index + 1,
-                archivo: photo,
-                impresion: selection.impresion || false,
-                invitacion: selection.invitacion || false,
-                descartada: selection.descartada || false
-            });
-        }
-    });
-
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `seleccion-fotos-xv-clara-susana-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-
-    showToast('Reporte descargado correctamente', 'success');
-}
-
 function generateTextSummary() {
     const stats = getStats();
     const fotosAdicionales = Math.max(0, stats.impresion - LIMITES.impresion);
     const costoExtra = fotosAdicionales * COSTO_FOTO_ADICIONAL;
 
-    let summary = '🎉 SELECCIÓN DE FOTOS - XV AÑOS CLARA SUSANA PALOMARES TORRES\n';
+    let summary = '🖤 SELECCIÓN DE FOTOS - XV AÑOS ÁNGEL SAID ANZUETO ARGUELLO\n';
     summary += '═══════════════════════════════════════════════════\n\n';
     summary += `📋 SEGÚN CONTRATO:\n`;
     summary += `   📸 Impresión incluida: ${LIMITES.impresion} fotos\n\n`;
     summary += `📊 RESUMEN ACTUAL:\n`;
     summary += `   Total de fotos disponibles: ${photos.length}\n`;
-    summary += `   📸 Para impresión: ${stats.impresion}/${LIMITES.impresion} ${stats.impresion === LIMITES.impresion ? '✓' : stats.impresion > LIMITES.impresion ? '⚠️ ADICIONALES' : '⚠️ FALTA'}\n`;
+    summary += `   📸 Para impresión: ${stats.impresion}/${LIMITES.impresion} ${stats.impresion === LIMITES.impresion ? '✓' : stats.impresion > LIMITES.impresion ? '⚠️ ADICIONALES' : ''}\n`;
     summary += `   💌 Para invitación: ${stats.invitacion}\n`;
     summary += `   ❌ Descartadas: ${stats.descartada}\n`;
     summary += `   ⭕ Sin clasificar: ${stats.sinClasificar}\n\n`;
@@ -797,13 +714,11 @@ function generateTextSummary() {
     }
 
     summary += `\n📅 Generado el: ${new Date().toLocaleString('es-MX')}\n`;
-
     return summary;
 }
 
 function copyToClipboard() {
     const summary = generateTextSummary();
-
     navigator.clipboard.writeText(summary).then(() => {
         showToast('Resumen copiado al portapapeles', 'success');
     }).catch(() => {
@@ -817,17 +732,10 @@ function copyToClipboard() {
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     if (!toast) return;
-
     toast.textContent = message;
     toast.className = `toast ${type}`;
-
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+    setTimeout(() => { toast.classList.add('show'); }, 100);
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
 }
 
 // ========================================
@@ -836,25 +744,10 @@ function showToast(message, type = 'success') {
 document.addEventListener('DOMContentLoaded', () => {
     renderGallery();
     setupLazyLoad();
-
-    // Sugerir fotos si aún no hay selecciones guardadas
-    const SUGERENCIAS = {
-        ampliacion: 45,   // DSC_4963 — retrato a media sesión
-        caja_fotos: 5,    // DJI drone — foto aérea para portada de caja
-        caja_usb:   80,   // DSC_4999 — otro retrato elegante
-    };
-    if (Object.keys(photoSelections).length === 0) {
-        Object.entries(SUGERENCIAS).forEach(([cat, idx]) => {
-            if (!photoSelections[idx]) photoSelections[idx] = {};
-            photoSelections[idx][cat] = true;
-        });
-    }
-
     updateStats();
     updateFilterButtons();
     loadSelections();
 
-    // Restaurar filtro y scroll de la sesión anterior
     const savedFilter = localStorage.getItem(KEY_FILTER);
     if (savedFilter) setFilter(savedFilter);
     const savedScroll = parseInt(localStorage.getItem(KEY_SCROLL) || '0');
@@ -862,59 +755,42 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, savedScroll)));
     }
 
-    // Filter buttons
-    const btnFilterAll = document.getElementById('btnFilterAll');
-    const btnFilterImpresion = document.getElementById('btnFilterImpresion');
-    const btnFilterInvitacion = document.getElementById('btnFilterInvitacion');
-    const btnFilterDescartada = document.getElementById('btnFilterDescartada');
-    const btnFilterSinClasificar = document.getElementById('btnFilterSinClasificar');
+    document.getElementById('btnFilterAll')?.addEventListener('click', () => setFilter('all'));
+    document.getElementById('btnFilterImpresion')?.addEventListener('click', () => setFilter('impresion'));
+    document.getElementById('btnFilterInvitacion')?.addEventListener('click', () => setFilter('invitacion'));
+    document.getElementById('btnFilterDescartada')?.addEventListener('click', () => setFilter('descartada'));
+    document.getElementById('btnFilterSinClasificar')?.addEventListener('click', () => setFilter('sin-clasificar'));
 
-    if (btnFilterAll) btnFilterAll.addEventListener('click', () => setFilter('all'));
-    if (btnFilterImpresion) btnFilterImpresion.addEventListener('click', () => setFilter('impresion'));
-    if (btnFilterInvitacion) btnFilterInvitacion.addEventListener('click', () => setFilter('invitacion'));
-    if (btnFilterDescartada) btnFilterDescartada.addEventListener('click', () => setFilter('descartada'));
-    if (btnFilterSinClasificar) btnFilterSinClasificar.addEventListener('click', () => setFilter('sin-clasificar'));
+    document.getElementById('btnExport')?.addEventListener('click', () => {
+        const text = generateTextSummary();
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement('a');
+        a.href     = url;
+        a.download = 'seleccion-fotos-angel-said.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+    document.getElementById('btnShare')?.addEventListener('click', copyToClipboard);
+    document.getElementById('btnClear')?.addEventListener('click', clearAllSelections);
 
-    // Action buttons
-    const btnExport = document.getElementById('btnExport');
-    const btnShare = document.getElementById('btnShare');
-    const btnClear = document.getElementById('btnClear');
+    document.querySelector('.modal-close')?.addEventListener('click', closeModal);
+    document.getElementById('btnCancelSelection')?.addEventListener('click', closeModal);
+    document.getElementById('btnSaveSelection')?.addEventListener('click', saveModalSelection);
 
-    if (btnExport) btnExport.addEventListener('click', exportToJSON);
-    if (btnShare) btnShare.addEventListener('click', copyToClipboard);
-    if (btnClear) btnClear.addEventListener('click', clearAllSelections);
-
-    // Modal controls
-    const modalClose = document.querySelector('.modal-close');
-    const btnCancelSelection = document.getElementById('btnCancelSelection');
-    const btnSaveSelection = document.getElementById('btnSaveSelection');
-
-    if (modalClose) modalClose.addEventListener('click', closeModal);
-    if (btnCancelSelection) btnCancelSelection.addEventListener('click', closeModal);
-    if (btnSaveSelection) btnSaveSelection.addEventListener('click', saveModalSelection);
-
-    // Option buttons
     document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            btn.classList.toggle('selected');
-        });
+        btn.addEventListener('click', () => btn.classList.toggle('selected'));
     });
 
-    // Close modal on outside click + swipe táctil para Android
     const photoModal = document.getElementById('photoModal');
     if (photoModal) {
         photoModal.addEventListener('click', (e) => {
-            if (e.target.id === 'photoModal') {
-                closeModal();
-            }
+            if (e.target.id === 'photoModal') closeModal();
         });
-
-        // Swipe: derecha = guardar selección + siguiente, izquierda = quitar + siguiente
         photoModal.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
         }, { passive: true });
-
         photoModal.addEventListener('touchend', (e) => {
             const deltaX = e.changedTouches[0].clientX - touchStartX;
             const deltaY = e.changedTouches[0].clientY - touchStartY;
@@ -925,37 +801,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // Navigation buttons
-    const btnPrevPhoto = document.getElementById('btnPrevPhoto');
-    const btnNextPhoto = document.getElementById('btnNextPhoto');
+    document.getElementById('btnPrevPhoto')?.addEventListener('click', () => navigatePhoto('prev'));
+    document.getElementById('btnNextPhoto')?.addEventListener('click', () => navigatePhoto('next'));
 
-    if (btnPrevPhoto) btnPrevPhoto.addEventListener('click', () => navigatePhoto('prev'));
-    if (btnNextPhoto) btnNextPhoto.addEventListener('click', () => navigatePhoto('next'));
+    // Realtime: cambios de otras sesiones activas al instante.
+    iniciarRealtime();
 
-    // Polling: sincronizar con otros usuarios cada 30 segundos
+    // Red de seguridad: si el websocket se cae o el navegador no lo
+    // soporta, un refresco periódico mantiene todo sincronizado.
     if (sbDisponible) {
-        setInterval(() => { if (!modalOpen) loadSelections(true); }, 30000);
+        setInterval(() => { loadSelections(true); }, 20000);
     }
+    // Al volver a la pestaña, ponerse al día de inmediato.
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && sbDisponible) loadSelections(true);
+    });
 
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         const modal = document.getElementById('photoModal');
         if (modal && modal.classList.contains('active')) {
-            if (e.key === 'Escape') {
-                closeModal();
-            } else if (e.key === 'Enter') {
-                saveModalSelection();
-            } else if (e.key === 'ArrowLeft') {
-                navigatePhoto('prev');
-            } else if (e.key === 'ArrowRight') {
-                navigatePhoto('next');
-            }
+            if (e.key === 'Escape') closeModal();
+            else if (e.key === 'Enter') saveModalSelection();
+            else if (e.key === 'ArrowLeft') navigatePhoto('prev');
+            else if (e.key === 'ArrowRight') navigatePhoto('next');
         }
     });
-
 });
 
-// Guardar scroll con debounce
 window.addEventListener('scroll', () => {
     if (modalOpen) return;
     clearTimeout(scrollSaveTimer);
@@ -976,7 +848,6 @@ window.addEventListener('beforeunload', () => {
     try { localStorage.setItem(KEY_SCROLL, window.scrollY); } catch (e) {}
 });
 
-// Registrar Service Worker
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
@@ -1006,7 +877,7 @@ async function downloadCurrentPhoto() {
         a.href = objUrl; a.download = filename;
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
         setTimeout(function(){ URL.revokeObjectURL(objUrl); }, 2000);
-        sbRegistrarVisita('descarga');
+        if (sbDisponible) SB.registrarVisita('descarga');
         showToast('Descargando ' + filename, 'success');
     } catch(e) {
         window.open(url, '_blank');
