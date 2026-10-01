@@ -1,4 +1,4 @@
-const CACHE_SHELL = 'angel-said-shell-v1';
+const CACHE_SHELL = 'angel-said-shell-v2';
 const CACHE_IMAGES = 'angel-said-images-v1';
 
 self.addEventListener('install', event => {
